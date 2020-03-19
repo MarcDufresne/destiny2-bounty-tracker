@@ -1,0 +1,3 @@
+[submodule "destiny2-bounty-tracker-web"]
+	path = destiny2-bounty-tracker-web
+	url = git@github.com:MarcDufresne/destiny2-bounty-tracker-web.git
