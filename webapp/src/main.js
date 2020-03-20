@@ -6,7 +6,7 @@ import Vuetify from "vuetify";
 Vue.config.productionTip = false;
 Vue.use(Vuetify);
 
-new Vue({
+let vm = new Vue({
   vuetify,
   render: h => h(App)
 }).$mount('#app');

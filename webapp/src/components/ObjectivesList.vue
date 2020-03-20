@@ -5,7 +5,7 @@
                          v-bind:key="category_name"
             >
                 <h3>{{ formatName(category_name) }}</h3>
-                <ObjectivesCategory :objectives="category_objectives"/>
+                <ObjectivesCategory :objectives="category_objectives" :selectedActivityFilters="selectedActivityFilters" />
             </v-container>
         </v-row>
     </v-container>
@@ -17,7 +17,7 @@
     export default {
         name: "ObjectivesList",
         components: {ObjectivesCategory},
-        props: ["objectives"],
+        props: ["objectives", "selectedActivityFilters"],
         data: () => ({
             formattedNames: {
                 null: "General",

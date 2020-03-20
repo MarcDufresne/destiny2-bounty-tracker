@@ -1,7 +1,9 @@
 <template>
     <v-container fluid grid-list-md>
         <v-layout row wrap>
-            <v-flex d-flex xs12 sm6 md4 lg3 xl2 v-for="(objective, index) in objectives" v-bind:key="index">
+            <v-flex d-flex xs12 sm6 md4 lg3 xl2 v-for="(objective, index) in objectives" v-bind:key="index"
+                    v-if="selectedActivityFilters.includes(objective.activity)"
+            >
                 <v-card width="100%" elevation="4">
                     <v-list-item>
                         <v-list-item-avatar tile size="54">
@@ -57,7 +59,7 @@
 
     export default {
         name: "ObjectivesCategory",
-        props: ["objectives"],
+        props: ["objectives", "selectedActivityFilters"],
         data: () => ({
             formattedNames: {
                 "global": "Global",

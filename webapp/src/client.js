@@ -59,7 +59,6 @@ export const Client = {
             {components: "200"}
         );
         const userProfileData = userProfileResp.data;
-        console.log(userProfileData);
 
         const characters = Object.keys(userProfileData.Response.characters.data);
 

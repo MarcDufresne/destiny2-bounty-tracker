@@ -20,7 +20,7 @@
             >
                 <v-card flat>
                     <v-card-text>
-                        <ObjectivesList :objectives="objectives"/>
+                        <ObjectivesList :objectives="objectives" :selectedActivityFilters="selectedActivityFilters" />
                     </v-card-text>
                 </v-card>
             </v-tab-item>
@@ -37,26 +37,31 @@
         name: "Bounties",
         components: {ObjectivesList},
         props: {
-            accessToken: String
+            accessToken: String,
+            autoRefresh: Boolean,
+            selectedActivityFilters: Array,
         },
         data: () => ({
             tab_model: null,
-            objectives: []
+            objectives: [],
         }),
         async mounted() {
             this.getObjectives();
         },
-        created() {
-            setInterval(this.interval, 5000);
-        },
-        destroyed() {
-            clearInterval(this.interval);
+        watch: {
+            autoRefresh: function (newValue, _) {
+                if (newValue) {
+                    this.getObjectives();
+                    this.autoRefreshRef = setInterval(this.interval, 10000);
+                } else {
+                    clearInterval(this.autoRefreshRef);
+                }
+            }
         },
         methods: {
             async getObjectives() {
                 const accessToken = LocalStorage.getToken(LOCAL_STORAGE_ACCESS_TOKEN_KEY);
-                const resp = await Client.getObjectives(accessToken.token);
-                this.objectives = resp;
+                this.objectives = await Client.getObjectives(accessToken.token);
             },
             async interval() {
                 await this.getObjectives();
