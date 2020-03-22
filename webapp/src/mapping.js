@@ -722,5 +722,6 @@ export const OBJECTIVE_MAPPING = {
     "4156642873": Models.ObjectiveMapping(ActivityType.SEASONAL, WeaponType.SIDEARM),
     "153545701": Models.ObjectiveMapping(ActivityType.STRIKES, WeaponType.AUTO_RIFLE),
     "889004821": Models.ObjectiveMapping(ActivityType.STRIKES, AbilityType.GRENADE),
+    "1093078599": Models.ObjectiveMapping(ActivityType.STRIKES, AbilityType.MELEE),
     "ID": Models.ObjectiveMapping(ActivityType.GLOBAL, null),
 };
