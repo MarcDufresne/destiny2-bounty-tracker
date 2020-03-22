@@ -6,6 +6,9 @@ export const ActivityType = {
     GAMBIT: "gambit",
     SEASONAL: "seasonal",
     PLAYLIST: "playlist",
+    EVENT: "event",
+    RAID: "raid",
+    IRON_BANNER: "iron_banner",
 };
 
 export const DestinationType = {
@@ -54,7 +57,9 @@ export const AbilityType = {
     MELEE: "melee",
     GRENADE: "grenade",
     SUPER: "super",
+    ABILITIES: "abilities",
     FINISHER: "finisher",
+    ORBS: "orbs"
 };
 
 export const EnemyType = {

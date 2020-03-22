@@ -19,7 +19,3 @@ VUE_APP_OAUTH_CLIENT_SECRET=Secret.Key.From.Bungie
 ```
 
 ## TODOs
-
-- Add refresh token support
-- Make mapping file dynamic
-- Make definitions dynamic, and/or create a script to update them(?)

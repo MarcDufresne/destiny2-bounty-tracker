@@ -6,6 +6,9 @@ export const Time = {
     },
     formatTime(timeString) {
         return moment(timeString).fromNow();
+    },
+    dateFormat(timeString) {
+        return moment(timeString).format("YYYY-MM-DD HH:mm:ss ZZ")
     }
 };
 

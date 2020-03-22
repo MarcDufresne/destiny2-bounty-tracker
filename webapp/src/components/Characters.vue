@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="Object.keys(this.objectives).length > 0">
         <v-tabs
                 fixed-tabs
                 background-color="indigo"
@@ -19,12 +19,19 @@
                     :value="`${index}`"
             >
                 <v-card flat>
-                    <v-card-text>
-                        <ObjectivesList :objectives="objectives" :selectedActivityFilters="selectedActivityFilters" />
+                    <v-card-text class="pa-0">
+                        <ObjectivesList :objectives="objectives" :selectedActivityFilters="selectedActivityFilters"/>
                     </v-card-text>
                 </v-card>
             </v-tab-item>
         </v-tabs-items>
+    </div>
+    <div v-else>
+        <v-container>
+            <v-row align="center" justify="center" class="pt-4">
+                <v-progress-circular indeterminate color="indigo"></v-progress-circular>
+            </v-row>
+        </v-container>
     </div>
 </template>
 
@@ -43,7 +50,7 @@
         },
         data: () => ({
             tab_model: null,
-            objectives: [],
+            objectives: {},
         }),
         async mounted() {
             this.getObjectives();

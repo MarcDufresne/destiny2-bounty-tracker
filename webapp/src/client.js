@@ -41,6 +41,12 @@ const DEF_GENDER = {
 
 export const Client = {
     async getObjectives(accessToken) {
+        if (process.env.NODE_ENV === "development") {
+            const manifestResp = await ApiService.get("/Destiny2/Manifest/", accessToken);
+            const manifestData = manifestResp.data;
+            console.log(manifestData);
+        }
+
         const userDataResp = await ApiService.get("/User/GetMembershipsForCurrentUser/", accessToken);
         const userResp = userDataResp.data;
         const primaryMembership = userResp.Response.primaryMembershipId;
@@ -144,5 +150,5 @@ export const Client = {
         }
 
         return accountObjectives;
-    },
+    }
 };

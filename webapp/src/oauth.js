@@ -30,7 +30,32 @@ export const OAuth = {
             })
             .then((data) => {
                 if (data.access_token && data.refresh_token) {
-                    console.log(data);
+                    return data;
+                }
+                throw new Error(`No data found in response, ${data}`)
+            });
+    },
+    fetchTokenFromRefreshToken(refreshToken) {
+        return fetch(OAUTH_TOKEN_URL, {
+            method: 'POST',
+            body: stringify({
+                grant_type: 'refresh_token',
+                refresh_token: refreshToken,
+                client_id: OAUTH_CLIENT_ID,
+                client_secret: OAUTH_CLIENT_SECRET,
+            }),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        })
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error(`Could not fetch token, ${response.status}`)
+            })
+            .then((data) => {
+                if (data.access_token && data.refresh_token) {
                     return data;
                 }
                 throw new Error(`No data found in response, ${data}`)
