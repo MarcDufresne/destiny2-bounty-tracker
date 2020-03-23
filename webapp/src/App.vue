@@ -12,6 +12,14 @@
                 <v-icon v-on:click="findUnmappedObjectives()">mdi-clock</v-icon>
             </v-btn>
             <v-btn v-if="loggedIn" icon>
+                <v-icon v-if="compactMode" v-on:click="compactMode = !compactMode" title="Switch to Normal Layout">
+                    mdi-view-list
+                </v-icon>
+                <v-icon v-else v-on:click="compactMode = !compactMode" title="Switch to Compact Mode">
+                    mdi-view-grid
+                </v-icon>
+            </v-btn>
+            <v-btn v-if="loggedIn" icon>
                 <v-icon v-if="autoRefresh" v-on:click="toggleAutoRefresh" title="Pause Auto-Refresh">pause</v-icon>
                 <v-icon v-else v-on:click="toggleAutoRefresh" title="Enable Auto-Refresh">loop</v-icon>
             </v-btn>
@@ -67,6 +75,7 @@
                         :auto-refresh="autoRefresh"
                         :selectedActivityFilters="selectedActivityFilters"
                         :showCompletedObjectives="showCompletedObjectives"
+                        :compactMode="compactMode"
                 />
             </div>
             <div v-else>
@@ -122,6 +131,7 @@
             selectedActivityFilters: [],
             showCompletedObjectives: true,
             formattedNames: ACTIVITY_TYPES_FORMAT,
+            compactMode: false,
             devMode: process.env.NODE_ENV === "development"
         }),
         created() {

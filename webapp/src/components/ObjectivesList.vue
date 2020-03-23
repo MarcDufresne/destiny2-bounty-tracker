@@ -3,14 +3,32 @@
         <v-row>
             <v-container v-for="(category_objectives, category_name) in objectives"
                          v-bind:key="category_name"
-                         class="pt-1 pb-0"
+                         class="pa-0"
             >
-                <h3>{{ formatName(category_name) }}</h3>
-                <ObjectivesCategory
-                        :objectives="category_objectives"
-                        :selectedActivityFilters="selectedActivityFilters"
-                        :showCompletedObjectives="showCompletedObjectives"
-                />
+                <v-container fluid grid-list-md class="pa-0" v-if="compactMode">
+                    <v-layout row wrap>
+                        <v-col cols="1" class="pr-0">
+                            <span>{{ formatName(category_name) }}</span>
+                        </v-col>
+                        <v-col cols="11" class="pl-1">
+                            <ObjectivesCategory
+                                    :objectives="category_objectives"
+                                    :selectedActivityFilters="selectedActivityFilters"
+                                    :showCompletedObjectives="showCompletedObjectives"
+                                    :compactMode="compactMode"
+                            />
+                        </v-col>
+                    </v-layout>
+                </v-container>
+                <v-container class="pa-0" v-else>
+                    <h3>{{ formatName(category_name) }}</h3>
+                    <ObjectivesCategory
+                            :objectives="category_objectives"
+                            :selectedActivityFilters="selectedActivityFilters"
+                            :showCompletedObjectives="showCompletedObjectives"
+                            :compactMode="compactMode"
+                    />
+                </v-container>
             </v-container>
         </v-row>
     </v-container>
@@ -23,9 +41,9 @@
     export default {
         name: "ObjectivesList",
         components: {ObjectivesCategory},
-        props: ["objectives", "selectedActivityFilters", "showCompletedObjectives"],
+        props: ["objectives", "selectedActivityFilters", "showCompletedObjectives", "compactMode"],
         data: () => ({
-            formattedNames: OBJECTIVE_TYPES_FORMAT
+            formattedNames: OBJECTIVE_TYPES_FORMAT,
         }),
         methods: {
             formatName(rawName) {
@@ -33,11 +51,13 @@
                     return this.formattedNames[rawName];
                 }
                 return rawName;
-            }
+            },
         }
     }
 </script>
 
 <style scoped>
-
+    .compact-titles {
+        word-break: break-word;
+    }
 </style>
