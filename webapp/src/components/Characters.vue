@@ -20,7 +20,11 @@
             >
                 <v-card flat>
                     <v-card-text class="pa-0">
-                        <ObjectivesList :objectives="objectives" :selectedActivityFilters="selectedActivityFilters"/>
+                        <ObjectivesList
+                                :objectives="objectives"
+                                :selectedActivityFilters="selectedActivityFilters"
+                                :showCompletedObjectives="showCompletedObjectives"
+                        />
                     </v-card-text>
                 </v-card>
             </v-tab-item>
@@ -47,6 +51,7 @@
             accessToken: String,
             autoRefresh: Boolean,
             selectedActivityFilters: Array,
+            showCompletedObjectives: Boolean,
         },
         data: () => ({
             tab_model: null,
@@ -59,7 +64,7 @@
             autoRefresh: function (newValue, _) {
                 if (newValue) {
                     this.getObjectives();
-                    this.autoRefreshRef = setInterval(this.interval, 10000);
+                    this.autoRefreshRef = setInterval(this.interval, 5000);
                 } else {
                     clearInterval(this.autoRefreshRef);
                 }
@@ -68,7 +73,7 @@
         methods: {
             async getObjectives() {
                 const accessToken = LocalStorage.getToken(LOCAL_STORAGE_ACCESS_TOKEN_KEY);
-                this.objectives = await Client.getObjectives(accessToken.token);
+                this.objectives = await Client.getObjectives(accessToken.token, this.objectives);
             },
             async interval() {
                 await this.getObjectives();

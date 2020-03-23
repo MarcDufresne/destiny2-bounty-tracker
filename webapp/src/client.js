@@ -40,11 +40,21 @@ const DEF_GENDER = {
 };
 
 export const Client = {
-    async getObjectives(accessToken) {
+    async getObjectives(accessToken, previousObjectives) {
         if (process.env.NODE_ENV === "development") {
             const manifestResp = await ApiService.get("/Destiny2/Manifest/", accessToken);
             const manifestData = manifestResp.data;
             console.log(manifestData);
+        }
+
+        let formattedPreviousObjs = {};
+        for (const charIndex in previousObjectives) {
+            for (const categoryIndex in previousObjectives[charIndex]) {
+                for (const objIndex in previousObjectives[charIndex][categoryIndex]) {
+                    const objective = previousObjectives[charIndex][categoryIndex][0];
+                    formattedPreviousObjs[objective.objectiveId] = objective.progress;
+                }
+            }
         }
 
         const userDataResp = await ApiService.get("/User/GetMembershipsForCurrentUser/", accessToken);
@@ -107,6 +117,15 @@ export const Client = {
                     const obj = charObjectives[item.itemInstanceId].objectives[objIndex];
                     const objectiveHash = obj.objectiveHash;
                     const objDetails = OBJECTIVE_MAPPING[objectiveHash];
+
+                    if (formattedPreviousObjs.hasOwnProperty(objectiveHash)) {
+                        if (obj.progress < formattedPreviousObjs[objectiveHash]) {
+                            if (process.env.NODE_ENV === "development") {
+                                console.log("Discarding outdated API response");
+                            }
+                            return previousObjectives;
+                        }
+                    }
 
                     if (!objDetails) {
                         console.log(

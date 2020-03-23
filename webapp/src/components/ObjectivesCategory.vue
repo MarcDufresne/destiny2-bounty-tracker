@@ -2,7 +2,7 @@
     <v-container fluid grid-list-md class="pt-1">
         <v-layout row wrap>
             <v-flex d-flex xs12 sm6 md4 lg3 xl2 v-for="(objective, index) in objectives" v-bind:key="index"
-                    v-if="selectedActivityFilters.includes(objective.activity)"
+                    v-if="(objective.activity == null) || (selectedActivityFilters.includes(objective.activity) && showCompletedObjectives) || (selectedActivityFilters.includes(objective.activity) && !showCompletedObjectives && objective.progress < objective.completionValue)"
             >
                 <v-card width="100%" elevation="4">
                     <v-list-item>
@@ -11,10 +11,22 @@
                         </v-list-item-avatar>
                         <v-list-item-content>
                             <v-list-item-title :title="objective.bounty.name" class="small-headline">
-                                <small>{{ objective.bounty.name }}</small>
+                                <small>
+                                    {{ objective.bounty.name }}
+                                </small>
                             </v-list-item-title>
                             <v-list-item-subtitle>
-                                <small>{{ formatName(objective.activity) }}</small>
+                                <small>
+                                    <span
+                                            v-if="objective.activity == null"
+                                            class="font-weight-bold"
+                                            title="Unmapped Objective, click to send feedback"
+                                    >
+                                        <a :href="unmappedObjectiveFeedbackLink(objective)" class="red--text" style="text-decoration: none">
+                                            Unmapped
+                                        </a>
+                                    </span>
+                                    {{ formatName(objective.activity) }}</small>
                             </v-list-item-subtitle>
                         </v-list-item-content>
                     </v-list-item>
@@ -52,7 +64,7 @@
                         <v-progress-linear
                                 height="20"
                                 :value="(objective.progress / objective.completionValue) * 100"
-                                :color='objective.completed ? "yellow darken-3" : "green"'
+                                :color='objective.progress >= objective.completionValue ? "yellow darken-3" : "green"'
                         >
                             <template v-slot="{ value }">
                                 {{ objective.progress }}/{{ objective.completionValue }}
@@ -73,7 +85,7 @@
 
     export default {
         name: "ObjectivesCategory",
-        props: ["objectives", "selectedActivityFilters"],
+        props: ["objectives", "selectedActivityFilters", "showCompletedObjectives"],
         data: () => ({
             formattedNames: ACTIVITY_TYPES_FORMAT,
             symbolMap: PROGRESS_DESC_SYMBOLS,
@@ -117,6 +129,18 @@
                     return description.replace(/\[.*]/, "");
                 }
                 return description;
+            },
+            unmappedObjectiveFeedbackLink(objective) {
+                let link = "https://github.com/MarcDufresne/destiny2-bounty-tracker-web/issues/new?";
+                link += "title=Unmapped%20Objective%20" + objective.objectiveId;
+                link += "&body=%2A%2AObj%20ID%2A%2A:%20" + objective.objectiveId;
+                link += "%0A%2A%2ABounty%20ID%2A%2A:%20" + objective.bounty.bountyId;
+                link += "%0A%2A%2ABounty%20Name%2A%2A:%20" + objective.bounty.name;
+                link += "%0A%2A%2ABounty%20Desc%2A%2A:%20" + objective.bounty.description;
+                link += "%0A%2A%2AProgress%20Desc%2A%2A:%20" + objective.progressDescription;
+                link += "%0A%2A%2AIcon%2A%2A:%20https://bungie.net" + objective.iconLink;
+                link += "&labels=UnmappedObjective";
+                return link;
             }
         }
     }

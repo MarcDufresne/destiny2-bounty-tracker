@@ -52,12 +52,22 @@
                                                 :label="formatName(value)" :value="value" height="10px"></v-checkbox>
                                 </div>
                             </v-row>
+                            <v-row>
+                                <div>
+                                    <v-checkbox v-model="showCompletedObjectives" class="ml-3 my-0"
+                                                label="Show Completed Objectives" height="10px"></v-checkbox>
+                                </div>
+                            </v-row>
                         </v-expansion-panel-content>
                     </v-expansion-panel>
                 </v-expansion-panels>
             </v-row>
             <div v-if="loggedIn">
-                <Characters :auto-refresh="autoRefresh" :selectedActivityFilters="selectedActivityFilters"/>
+                <Characters
+                        :auto-refresh="autoRefresh"
+                        :selectedActivityFilters="selectedActivityFilters"
+                        :showCompletedObjectives="showCompletedObjectives"
+                />
             </div>
             <div v-else>
                 <v-row align="center" justify="center">
@@ -110,6 +120,7 @@
             activityTypes: ActivityType,
             destinationTypes: DestinationType,
             selectedActivityFilters: [],
+            showCompletedObjectives: true,
             formattedNames: ACTIVITY_TYPES_FORMAT,
             devMode: process.env.NODE_ENV === "development"
         }),

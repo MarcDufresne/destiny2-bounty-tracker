@@ -6,7 +6,11 @@
                          class="pt-1 pb-0"
             >
                 <h3>{{ formatName(category_name) }}</h3>
-                <ObjectivesCategory :objectives="category_objectives" :selectedActivityFilters="selectedActivityFilters" />
+                <ObjectivesCategory
+                        :objectives="category_objectives"
+                        :selectedActivityFilters="selectedActivityFilters"
+                        :showCompletedObjectives="showCompletedObjectives"
+                />
             </v-container>
         </v-row>
     </v-container>
@@ -19,7 +23,7 @@
     export default {
         name: "ObjectivesList",
         components: {ObjectivesCategory},
-        props: ["objectives", "selectedActivityFilters"],
+        props: ["objectives", "selectedActivityFilters", "showCompletedObjectives"],
         data: () => ({
             formattedNames: OBJECTIVE_TYPES_FORMAT
         }),
