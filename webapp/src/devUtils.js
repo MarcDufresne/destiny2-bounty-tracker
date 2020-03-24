@@ -1,9 +1,11 @@
 import {OBJECTIVE_MAPPING} from "./mapping";
+import {DEF_OBJECTIVE} from "./definitions";
 
+let DEF_INVENTORY_ITEM_FULL;
 if (process.env.NODE_ENV === "development"){
-    const DEF_INVENTORY_ITEM_FULL = require("./definitions/DestinyInventoryItemDefinition.json");
+    DEF_INVENTORY_ITEM_FULL = require("./definitions/DestinyInventoryItemDefinition.json");
 } else {
-    const DEF_INVENTORY_ITEM_FULL = {}
+    DEF_INVENTORY_ITEM_FULL = {}
 }
 
 export const DevUtils = {
@@ -11,7 +13,7 @@ export const DevUtils = {
         let res = "";
         for (const itemIndex in DEF_INVENTORY_ITEM_FULL) {
             const item = DEF_INVENTORY_ITEM_FULL[itemIndex];
-            if (item.itemType !== 26) {
+            if (!item.hasOwnProperty("objectives") || !item.itemTypeDisplayName.includes("Bounty")) {
                 continue
             }
             let msg = "";

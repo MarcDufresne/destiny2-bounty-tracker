@@ -9,6 +9,7 @@ export const ActivityType = {
     EVENT: "event",
     RAID: "raid",
     IRON_BANNER: "iron_banner",
+    TRIALS: "trials",
 };
 
 export const DestinationType = {
@@ -40,6 +41,7 @@ export const WeaponType = {
     TRACE_RIFLE: "trace_rifle",
     BOW: "bow",
     NORMAL_GRENADE_LAUNCHER: "normal_grenade_launcher",
+    SPECIAL_GRENADE_LAUNCHER: "special_grenade_launcher",
     POWER_GRENADE_LAUNCHER: "power_grenade_launcher",
     MACHINE_GUN: "machine_gun",
     SWORD: "sword",

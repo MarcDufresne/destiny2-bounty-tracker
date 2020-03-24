@@ -10,6 +10,7 @@ export const ACTIVITY_TYPES_FORMAT = {
     "event": "Event",
     "raid": "Raid",
     "iron_banner": "Iron Banner",
+    "trials": "Trials",
     "edz": "EDZ",
     "mars": "Mars",
     "io": "IO",
