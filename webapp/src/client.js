@@ -42,10 +42,11 @@ export const Client = {
     async getObjectives(accessToken, previousObjectives) {
         let formattedPreviousObjs = {};
         for (const charIndex in previousObjectives) {
+            formattedPreviousObjs[charIndex] = {};
             for (const categoryIndex in previousObjectives[charIndex]) {
                 for (const objIndex in previousObjectives[charIndex][categoryIndex]) {
                     const objective = previousObjectives[charIndex][categoryIndex][0];
-                    formattedPreviousObjs[objective.objectiveId] = objective.progress;
+                    formattedPreviousObjs[charIndex][objective.objectiveId] = objective.progress;
                 }
             }
         }
@@ -111,12 +112,14 @@ export const Client = {
                     const objectiveHash = obj.objectiveHash;
                     const objDetails = OBJECTIVE_MAPPING[objectiveHash];
 
-                    if (formattedPreviousObjs.hasOwnProperty(objectiveHash)) {
-                        if (obj.progress < formattedPreviousObjs[objectiveHash]) {
-                            if (process.env.NODE_ENV === "development") {
-                                console.log("Discarding outdated API response");
+                    if (formattedPreviousObjs.hasOwnProperty(charDesc)) {
+                        if (formattedPreviousObjs[charDesc].hasOwnProperty(objectiveHash)) {
+                            if (obj.progress < formattedPreviousObjs[charDesc][objectiveHash]) {
+                                if (process.env.NODE_ENV === "development") {
+                                    console.log("Discarding outdated API response");
+                                }
+                                return previousObjectives;
                             }
-                            return previousObjectives;
                         }
                     }
 
