@@ -5,7 +5,6 @@ import {Models} from "./models";
 import {DEF_INVENTORY_ITEM_LITE, DEF_OBJECTIVE} from "./definitions";
 import {OBJECTIVE_MAPPING} from "./mapping";
 
-
 const API_KEY = process.env.VUE_APP_API_KEY;
 
 
@@ -41,12 +40,6 @@ const DEF_GENDER = {
 
 export const Client = {
     async getObjectives(accessToken, previousObjectives) {
-        if (process.env.NODE_ENV === "development") {
-            const manifestResp = await ApiService.get("/Destiny2/Manifest/", accessToken);
-            const manifestData = manifestResp.data;
-            console.log(manifestData);
-        }
-
         let formattedPreviousObjs = {};
         for (const charIndex in previousObjectives) {
             for (const categoryIndex in previousObjectives[charIndex]) {

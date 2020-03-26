@@ -196,7 +196,7 @@
                         if (refreshToken) {
                             if (moment(refreshToken.expires).isAfter()) {
                                 this.refreshAccessToken(refreshToken.token);
-                                return true;
+                                return false;
                             } else {
                                 return false;
                             }
