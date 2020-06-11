@@ -131,7 +131,7 @@
             selectedActivityFilters: [],
             showCompletedObjectives: true,
             formattedNames: ACTIVITY_TYPES_FORMAT,
-            compactMode: false,
+            compactMode: true,
             devMode: process.env.NODE_ENV === "development"
         }),
         created() {
@@ -167,7 +167,6 @@
             },
             toggleAutoRefresh() {
                 this.autoRefresh = !this.autoRefresh;
-                this.selectedActivityFilters.push("crucible");
             },
             formatName(rawName) {
                 if (rawName in this.formattedNames) {
