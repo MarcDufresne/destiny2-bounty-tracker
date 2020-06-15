@@ -8,6 +8,12 @@ if (process.env.NODE_ENV === "development"){
     DEF_INVENTORY_ITEM_FULL = {}
 }
 
+export function devConsoleLog(message) {
+    if (process.env.NODE_ENV === "development") {
+        console.log(message);
+    }
+}
+
 export const DevUtils = {
     findUnmappedObjectives() {
         let res = "";

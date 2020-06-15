@@ -4,8 +4,12 @@ import VueAxios from "vue-axios";
 import {Models} from "./models";
 import {DEF_INVENTORY_ITEM_LITE, DEF_OBJECTIVE} from "./definitions";
 import {OBJECTIVE_MAPPING} from "./mapping";
+import moment from "moment";
+import {devConsoleLog} from "./devUtils";
 
 const API_KEY = process.env.VUE_APP_API_KEY;
+
+const hash = require("object-hash");
 
 
 Vue.use(VueAxios, axios);
@@ -38,18 +42,42 @@ const DEF_GENDER = {
     2204441813: "Female",
 };
 
-export const Client = {
-    async getObjectives(accessToken, previousObjectives) {
-        let formattedPreviousObjs = {};
-        for (const charIndex in previousObjectives) {
-            formattedPreviousObjs[charIndex] = {};
-            for (const categoryIndex in previousObjectives[charIndex]) {
-                for (const objIndex in previousObjectives[charIndex][categoryIndex]) {
-                    const objective = previousObjectives[charIndex][categoryIndex][0];
-                    formattedPreviousObjs[charIndex][objective.objectiveId] = objective.progress;
-                }
-            }
+let hashes = {}  // hash: timestamp
+
+
+function hashData(data) {
+    return hash(data);
+}
+
+function isDataHashNew(dataHash) {
+    return !hashes.hasOwnProperty(dataHash);
+}
+
+
+function addToHashes(dataHash) {
+    if (!hashes.hasOwnProperty(dataHash)) {
+        hashes[dataHash] = moment().unix();
+    }
+}
+
+function cleanupHashes() {
+    const now = moment().unix();
+    console.log(hashes);
+    let newHashes = {};
+    for (const [h, t] of Object.entries(hashes)) {
+        if (now - t < 600) {
+            newHashes[h] = t
+        } else {
+            devConsoleLog(`Removing old hash: ${h}`);
         }
+    }
+    hashes = newHashes;
+}
+
+
+export const Client = {
+    async getObjectives(accessToken) {
+        cleanupHashes();
 
         const userDataResp = await ApiService.get("/User/GetMembershipsForCurrentUser/", accessToken);
         const userResp = userDataResp.data;
@@ -66,21 +94,26 @@ export const Client = {
         const userProfileResp = await ApiService.get(
             `/Destiny2/${membershipType}/Profile/${primaryMembership}/`,
             accessToken,
-            {components: "200"}
+            {components: "200,201,300,301"}
         );
         const userProfileData = userProfileResp.data;
+
+        const dataHash = hashData(userProfileData.Response.characterInventories);
+        if (!isDataHashNew(dataHash)) {
+            console.log("Outdated or unchanged data returned by Bungie API");
+            return false;
+        }
+
+        addToHashes(dataHash);
+
+        devConsoleLog(`Hash: ${dataHash}`);
+        devConsoleLog(userProfileData);
 
         const characters = Object.keys(userProfileData.Response.characters.data);
 
         let accountObjectives = {};
         for (const charIdIndex in characters) {
             const charId = characters[charIdIndex];
-            const charResp = await ApiService.get(
-                `/Destiny2/${membershipType}/Profile/${primaryMembership}/Character/${charId}/`,
-                accessToken,
-                {components: "201,300,301"}
-            );
-            const charRespData = charResp.data;
 
             const charRace = DEF_RACE[userProfileData.Response.characters.data[charId].raceHash];
             const charGender = DEF_GENDER[userProfileData.Response.characters.data[charId].genderHash];
@@ -88,9 +121,8 @@ export const Client = {
 
             const charDesc = `${charLight} ${charRace} ${charGender}`;
 
-            const charItems = charRespData.Response.inventory.data.items;
-            const charInstances = charRespData.Response.itemComponents.instances.data;
-            const charObjectives = charRespData.Response.itemComponents.objectives.data;
+            const charItems = userProfileData.Response.characterInventories.data[charId].items;
+            const charObjectives = userProfileData.Response.itemComponents.objectives.data;
 
             let objectives = [];
             for (const itemIndex in charItems) {
@@ -111,17 +143,6 @@ export const Client = {
                     const obj = charObjectives[item.itemInstanceId].objectives[objIndex];
                     const objectiveHash = obj.objectiveHash;
                     const objDetails = OBJECTIVE_MAPPING[objectiveHash];
-
-                    if (formattedPreviousObjs.hasOwnProperty(charDesc)) {
-                        if (formattedPreviousObjs[charDesc].hasOwnProperty(objectiveHash)) {
-                            if (obj.progress < formattedPreviousObjs[charDesc][objectiveHash]) {
-                                if (process.env.NODE_ENV === "development") {
-                                    console.log("Discarding outdated API response");
-                                }
-                                return previousObjectives;
-                            }
-                        }
-                    }
 
                     if (!objDetails) {
                         console.log(

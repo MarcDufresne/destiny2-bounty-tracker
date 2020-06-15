@@ -102,7 +102,7 @@
 <script>
     import {v4 as uuid} from 'uuid';
     import moment from 'moment';
-    import {DevUtils} from "./devUtils";
+    import {devConsoleLog, DevUtils} from "./devUtils";
     import {OAuth} from './oauth';
     import {LOCAL_STORAGE_ACCESS_TOKEN_KEY, LOCAL_STORAGE_REFRESH_TOKEN_KEY, LocalStorage} from "./utils";
     import {ActivityType, DestinationType} from "./models";
@@ -182,9 +182,7 @@
                 setInterval(this.isLoggedIn, 5000);
             },
             isLoggedIn() {
-                if (process.env.NODE_ENV === "development") {
-                    console.log("Checking auth status...")
-                }
+                devConsoleLog("Checking auth status...");
                 const refreshToken = LocalStorage.getToken(LOCAL_STORAGE_REFRESH_TOKEN_KEY);
                 const accessToken = LocalStorage.getToken(LOCAL_STORAGE_ACCESS_TOKEN_KEY);
 

@@ -20,7 +20,7 @@
             >
                 <v-card flat>
                     <v-card-text class="pa-0">
-                        <ObjectivesList
+                        <CharacterObjectives
                                 :objectives="objectives"
                                 :selectedActivityFilters="selectedActivityFilters"
                                 :showCompletedObjectives="showCompletedObjectives"
@@ -43,11 +43,11 @@
 <script>
     import {Client} from "../client";
     import {LocalStorage, LOCAL_STORAGE_ACCESS_TOKEN_KEY} from "../utils";
-    import ObjectivesList from "./ObjectivesList";
+    import CharacterObjectives from "./CharacterObjectives";
 
     export default {
         name: "Bounties",
-        components: {ObjectivesList},
+        components: {CharacterObjectives},
         props: {
             accessToken: String,
             autoRefresh: Boolean,
@@ -60,7 +60,7 @@
             objectives: {},
         }),
         async mounted() {
-            this.getObjectives();
+            await this.getObjectives();
         },
         watch: {
             autoRefresh: function (newValue, _) {
@@ -75,7 +75,11 @@
         methods: {
             async getObjectives() {
                 const accessToken = LocalStorage.getToken(LOCAL_STORAGE_ACCESS_TOKEN_KEY);
-                this.objectives = await Client.getObjectives(accessToken.token, this.objectives);
+
+                const newObjectives = await Client.getObjectives(accessToken.token);
+                if (newObjectives !== false) {
+                    this.objectives = newObjectives;
+                }
             },
             async interval() {
                 await this.getObjectives();

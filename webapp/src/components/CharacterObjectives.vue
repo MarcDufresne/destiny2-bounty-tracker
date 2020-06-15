@@ -1,6 +1,9 @@
 <template>
     <v-container fluid>
         <v-row>
+            <v-container class="pa-0" v-for="objectiveId in pinnedObjectiveIDs" v-bind:key="objectiveId">
+
+            </v-container>
             <v-container v-for="(category_objectives, category_name) in objectives"
                          v-bind:key="category_name"
                          class="pa-0"
@@ -41,11 +44,12 @@
     import {OBJECTIVE_TYPES_FORMAT} from "../formatting";
 
     export default {
-        name: "ObjectivesList",
+        name: "CharacterObjectives",
         components: {ObjectivesCategory},
         props: ["objectives", "selectedActivityFilters", "showCompletedObjectives", "compactMode"],
         data: () => ({
             formattedNames: OBJECTIVE_TYPES_FORMAT,
+            pinnedObjectiveIDs: []
         }),
         methods: {
             formatName(rawName) {
