@@ -7,18 +7,10 @@
         >
             <v-toolbar-title>Destiny 2 Bounty Tracker</v-toolbar-title>
             <v-spacer></v-spacer>
-
             <v-btn v-if="devMode" icon>
                 <v-icon v-on:click="findUnmappedObjectives()">mdi-clock</v-icon>
             </v-btn>
-            <v-btn v-if="loggedIn" icon>
-                <v-icon v-if="compactMode" v-on:click="compactMode = !compactMode" title="Switch to Normal Layout">
-                    mdi-view-list
-                </v-icon>
-                <v-icon v-else v-on:click="compactMode = !compactMode" title="Switch to Compact Mode">
-                    mdi-view-grid
-                </v-icon>
-            </v-btn>
+            <small>Updated {{ lastUpdate }}</small>
             <v-btn v-if="loggedIn" icon>
                 <v-icon v-if="autoRefresh" v-on:click="toggleAutoRefresh" title="Pause Auto-Refresh">pause</v-icon>
                 <v-icon v-else v-on:click="toggleAutoRefresh" title="Enable Auto-Refresh">loop</v-icon>
@@ -75,7 +67,7 @@
                         :auto-refresh="autoRefresh"
                         :selectedActivityFilters="selectedActivityFilters"
                         :showCompletedObjectives="showCompletedObjectives"
-                        :compactMode="compactMode"
+                        v-on:objectiveUpdate="lastUpdateTimestamp = $event"
                 />
             </div>
             <div v-else>
@@ -104,7 +96,7 @@
     import moment from 'moment';
     import {devConsoleLog, DevUtils} from "./devUtils";
     import {OAuth} from './oauth';
-    import {LOCAL_STORAGE_ACCESS_TOKEN_KEY, LOCAL_STORAGE_REFRESH_TOKEN_KEY, LocalStorage} from "./utils";
+    import {LOCAL_STORAGE_ACCESS_TOKEN_KEY, LOCAL_STORAGE_REFRESH_TOKEN_KEY, LocalStorage, Time} from "./utils";
     import {ActivityType, DestinationType} from "./models";
     import Characters from './components/Characters';
     import {ACTIVITY_TYPES_FORMAT} from "./formatting";
@@ -131,8 +123,9 @@
             selectedActivityFilters: [],
             showCompletedObjectives: true,
             formattedNames: ACTIVITY_TYPES_FORMAT,
-            compactMode: true,
-            devMode: process.env.NODE_ENV === "development"
+            devMode: process.env.NODE_ENV === "development",
+            lastUpdate: "never",
+            lastUpdateTimestamp: moment().unix(),
         }),
         created() {
             this.$vuetify.theme.dark = true;
@@ -143,6 +136,7 @@
             this.selectAllActivities();
             this.selectAllDestinations();
             this.loggedInInterval();
+            this.updateTimestampInterval();
         },
         methods: {
             selectAllActivities() {
@@ -247,7 +241,13 @@
             },
             findUnmappedObjectives() {
                 DevUtils.findUnmappedObjectives();
-            }
+            },
+            formatUpdateText() {
+                this.lastUpdate = moment.unix(this.lastUpdateTimestamp).fromNow();
+            },
+            updateTimestampInterval() {
+                setInterval(() => this.formatUpdateText(), 1000)
+            },
         }
     };
 </script>

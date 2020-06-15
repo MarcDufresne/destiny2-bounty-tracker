@@ -98,7 +98,7 @@ export const Client = {
         );
         const userProfileData = userProfileResp.data;
 
-        const dataHash = hashData(userProfileData.Response.characterInventories);
+        const dataHash = hashData(userProfileData.Response.itemComponents.objectives.data);
         if (!isDataHashNew(dataHash)) {
             console.log("Outdated or unchanged data returned by Bungie API");
             return false;
@@ -185,6 +185,6 @@ export const Client = {
             accountObjectives[charDesc] = categorizedObjectives
         }
 
-        return accountObjectives;
+        return [accountObjectives, moment().unix()];
     }
 };

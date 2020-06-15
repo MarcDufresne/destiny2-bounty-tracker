@@ -24,7 +24,6 @@
                                 :objectives="objectives"
                                 :selectedActivityFilters="selectedActivityFilters"
                                 :showCompletedObjectives="showCompletedObjectives"
-                                :compactMode="compactMode"
                         />
                     </v-card-text>
                 </v-card>
@@ -53,7 +52,6 @@
             autoRefresh: Boolean,
             selectedActivityFilters: Array,
             showCompletedObjectives: Boolean,
-            compactMode: Boolean,
         },
         data: () => ({
             tab_model: null,
@@ -78,13 +76,14 @@
 
                 const newObjectives = await Client.getObjectives(accessToken.token);
                 if (newObjectives !== false) {
-                    this.objectives = newObjectives;
+                    this.objectives = newObjectives[0];
+                    this.$emit('objectiveUpdate', newObjectives[1]);
                 }
             },
             async interval() {
                 await this.getObjectives();
             }
-        }
+        },
     }
 </script>
 

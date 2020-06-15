@@ -4,9 +4,7 @@
             <v-flex d-flex xs12 sm6 md4 lg3 xl2 v-for="(objective, index) in objectives" v-bind:key="index"
                     v-if="(objective.activity == null) || (selectedActivityFilters.includes(objective.activity) && showCompletedObjectives) || (selectedActivityFilters.includes(objective.activity) && !showCompletedObjectives && objective.progress < objective.completionValue)"
             >
-                <Objective
-                        :objective="objective"
-                        :compact-mode="compactMode" />
+                <Objective :objective="objective" v-on:pinObjective="$emit('pinObjective', $event)" :pins="pins" />
             </v-flex>
         </v-layout>
     </v-container>
@@ -18,7 +16,7 @@
     export default {
         name: "ObjectivesCategory",
         components: {Objective},
-        props: ["objectives", "selectedActivityFilters", "showCompletedObjectives", "compactMode"]
+        props: ["objectives", "selectedActivityFilters", "showCompletedObjectives", "pins"]
     }
 </script>
 

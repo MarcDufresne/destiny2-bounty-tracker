@@ -1,91 +1,27 @@
 <template>
-    <v-card width="100%" elevation="4" v-if="!compactMode">
-        <v-list-item>
-            <v-list-item-avatar tile size="54">
-                <v-img :src="`https://bungie.net${objective.iconLink}`"></v-img>
-            </v-list-item-avatar>
-            <v-list-item-content>
-                <v-list-item-title :title="objective.bounty.name" class="small-headline">
-                    <small>
-                        {{ objective.bounty.name }}
-                    </small>
-                </v-list-item-title>
-                <v-list-item-subtitle>
-                    <small>
-                        <span
-                                v-if="objective.activity == null"
-                                class="font-weight-bold"
-                                title="Unmapped Objective, click to send feedback"
-                        >
-                            <a :href="unmappedObjectiveFeedbackLink(objective)" class="red--text"
-                               style="text-decoration: none">
-                                Unmapped
-                            </a>
-                        </span>
-                        {{ formatName(objective.activity) }}
-                    </small>
-                </v-list-item-subtitle>
-            </v-list-item-content>
-        </v-list-item>
-        <v-card-text class="pt-0">
-            <p class="desc mb-2" :title="objective.bounty.description">
-                <small>{{ objective.bounty.description }}</small>
-            </p>
-            <p class="mb-0">
-                <v-row>
-                    <v-col cols="6" class="py-0 pr-1">
-                        <small class="overflow-hidden">
-                                        <span class="d2-font" v-if="hasSymbol(objective.progressDescription)">
-                                            {{ mapSymbol(objective.progressDescription) }}
-                                        </span>
-                            {{ cleanProgressDescription(objective.progressDescription) }}
+    <v-hover v-slot:default="{ hover }">
+        <v-card
+                width="100%"
+                elevation="4"
+                v-on:click="$emit('pinObjective', objective.objectiveId)"
+                :class="{ 'on-hover': hover }">
+            <div :class="{'pinned': pins}"></div>
+            <v-list-item class="pa-0"
+                         :title="objective.bounty.name + '\n' + objective.bounty.description + '\n' + compactDateFormat(objective.bounty.expiration)">
+                <v-list-item-avatar tile size="48" class="my-0 mb-1">
+                    <v-img :src="`https://bungie.net${objective.iconLink}`"></v-img>
+                </v-list-item-avatar>
+                <v-list-item-content class="py-0">
+                    <v-list-item-title class="small-headline mb-0">
+                        <small>
+                            <v-icon class="red--text expiration-icon-fix" v-if="!isAfter(objective.bounty.expiration)">
+                                mdi-clock-outline
+                            </v-icon>
+                            {{ objective.bounty.name }}
                         </small>
-                    </v-col>
-                    <v-col cols="6" class="py-0 pl-1">
-                        <div class="text-right overflow-hidden">
-                            <small v-if="isAfter(objective.bounty.expiration)">
-                                        <span :title="dateFormat(objective.bounty.expiration)">
-                                            Expires {{ formatTime(objective.bounty.expiration) }}
-                                        </span>
-                            </small>
-                            <small v-else>
-                                        <span class="red--text" :title="dateFormat(objective.bounty.expiration)">
-                                            Expired {{ formatTime(objective.bounty.expiration) }}
-                                        </span>
-                            </small>
-                        </div>
-                    </v-col>
-                </v-row>
-
-            </p>
-            <v-progress-linear
-                    height="20"
-                    :value="(objective.progress / objective.completionValue) * 100"
-                    :color='objective.progress >= objective.completionValue ? "yellow darken-3" : "green"'
-            >
-                <template v-slot="{ value }">
-                    {{ objective.progress }}/{{ objective.completionValue }}
-                </template>
-            </v-progress-linear>
-
-            <span class="hidden" title="Objective ID">{{ objective.objectiveId }}</span>
-        </v-card-text>
-    </v-card>
-    <v-card width="100%" elevation="4" v-else>
-        <v-list-item class="pa-0"
-                     :title="objective.bounty.name + '\n' + objective.bounty.description + '\n' + compactDateFormat(objective.bounty.expiration)">
-            <v-list-item-avatar tile size="48" class="my-0 mb-1">
-                <v-img :src="`https://bungie.net${objective.iconLink}`"></v-img>
-            </v-list-item-avatar>
-            <v-list-item-content class="py-0">
-                <v-list-item-title class="small-headline mb-0">
-                    <small>
-                        <v-icon class="red--text expiration-icon-fix" v-if="!isAfter(objective.bounty.expiration)">mdi-clock-outline</v-icon>
-                        {{ objective.bounty.name }}
-                    </small>
-                </v-list-item-title>
-                <v-list-item-subtitle>
-                    <small>
+                    </v-list-item-title>
+                    <v-list-item-subtitle>
+                        <small>
                         <span
                                 v-if="objective.activity == null"
                                 class="font-weight-bold"
@@ -96,41 +32,42 @@
                                 Unmapped
                             </a>
                         </span>
-                        {{ formatName(objective.activity) }}
-                    </small>
-                </v-list-item-subtitle>
-            </v-list-item-content>
-        </v-list-item>
-        <v-card-text class="pa-0">
-            <v-progress-linear
-                    height="20"
-                    :value="(objective.progress / objective.completionValue) * 100"
-                    :color='objective.progress >= objective.completionValue ? "yellow darken-3" : "green"'
-            >
-                <template v-slot="{ value }">
-                    <v-row>
-                        <v-col cols="6" class="py-0 pr-2 pl-4">
-                            <small class="overflow-hidden">
+                            {{ formatName(objective.activity) }}
+                        </small>
+                    </v-list-item-subtitle>
+                </v-list-item-content>
+            </v-list-item>
+            <v-card-text class="pa-0">
+                <v-progress-linear
+                        height="20"
+                        :value="(objective.progress / objective.completionValue) * 100"
+                        :color='objective.progress >= objective.completionValue ? "yellow darken-3" : "green"'
+                >
+                    <template v-slot="{ value }">
+                        <v-row>
+                            <v-col cols="6" class="py-0 pr-2 pl-4">
+                                <small class="overflow-hidden">
                                             <span class="d2-font" v-if="hasSymbol(objective.progressDescription)">
                                                 {{ mapSymbol(objective.progressDescription) }}
                                             </span>
-                                {{ cleanProgressDescription(objective.progressDescription) }}
-                            </small>
-                        </v-col>
-                        <v-col cols="6" class="py-0 pl-2 pr-4">
-                            <div class="text-right overflow-hidden">
-                                <small>
-                                    {{ objective.progress }} / {{ objective.completionValue }}
+                                    {{ cleanProgressDescription(objective.progressDescription) }}
                                 </small>
-                            </div>
-                        </v-col>
-                    </v-row>
-                </template>
-            </v-progress-linear>
+                            </v-col>
+                            <v-col cols="6" class="py-0 pl-2 pr-4">
+                                <div class="text-right overflow-hidden">
+                                    <small>
+                                        {{ objective.progress }} / {{ objective.completionValue }}
+                                    </small>
+                                </div>
+                            </v-col>
+                        </v-row>
+                    </template>
+                </v-progress-linear>
 
-            <span class="hidden" title="Objective ID">{{ objective.objectiveId }}</span>
-        </v-card-text>
-    </v-card>
+                <span class="hidden" title="Objective ID">{{ objective.objectiveId }}</span>
+            </v-card-text>
+        </v-card>
+    </v-hover>
 </template>
 <script>
     import {Time} from "../utils";
@@ -140,7 +77,7 @@
         name: 'Objective',
         props: {
             objective: {},
-            "compact-mode": true,
+            pins: false
         },
         data: () => ({
             formattedNames: ACTIVITY_TYPES_FORMAT,
@@ -236,5 +173,20 @@
         font-size: 90% !important;
         position: relative !important;
         top: -0.1em !important;
+    }
+
+    .v-card .on-hover {
+        background-color: #343434;
+    }
+
+    .pinned {
+        position: absolute;
+        left: calc(100% - 16px);
+        top: 0;
+        width: 16px;
+        height: 16px;
+        float: end;
+        clip-path: polygon(100% 0, 0 0, 100% 100%);
+        background-color: #32a852;
     }
 </style>
