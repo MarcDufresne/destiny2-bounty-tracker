@@ -19,3 +19,7 @@ VUE_APP_OAUTH_CLIENT_SECRET=Secret.Key.From.Bungie
 ```
 
 ## TODOs
+- [ ] Map Beyond Light bounties
+- [ ] Update filters for BL locations/activities
+- [ ] Add quests
+- [ ] Add thriumps
