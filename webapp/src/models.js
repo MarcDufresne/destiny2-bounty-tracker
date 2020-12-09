@@ -22,6 +22,7 @@ export const DestinationType = {
     TANGLED_SHORE: "tangled_shore",
     DREAMING_CITY: "dreaming_city",
     NESSUS: "nessus",
+    EUROPA: "europa",
 };
 
 export const WeaponType = {
@@ -52,6 +53,7 @@ export const DamageType = {
     SOLAR: "solar",
     ARC: "arc",
     VOID: "void",
+    STASIS: "stasis",
     PRECISION: "precision",
 };
 
