@@ -25,7 +25,6 @@ export const DevUtils = {
             for (const objIndex in item.objectives.objectiveHashes) {
                 const objId = item.objectives.objectiveHashes[objIndex];
                 if (OBJECTIVE_MAPPING.hasOwnProperty(objId)) {
-                    console.log(`Skipping obj ${objId}`);
                     continue;
                 }
                 let objData = {
@@ -35,7 +34,9 @@ export const DevUtils = {
                     invType: item.inventory.stackUniqueLabel,
                     objectiveId: objId,
                     objectiveDescription: DEF_OBJECTIVE[objId].progressDescription,
-                    icon: item.displayProperties.icon
+                    icon: item.displayProperties.icon,
+                    activityType: undefined,
+                    objectiveType: undefined,
                 };
                 resData.push(objData);
             }
