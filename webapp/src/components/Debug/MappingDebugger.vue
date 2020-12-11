@@ -1,6 +1,11 @@
-<script src="../../formatting.js"></script>
 <template>
   <v-container>
+    <div v-if="this.unmappedObjectives.length > 0">
+    <v-row class="pa-0 ma-0">
+      <v-progress-linear
+          height="10" color="green" :value="((mappingStep / unmappedObjectives.length) * 100)">
+      </v-progress-linear>
+    </v-row>
     <v-window v-model="mappingStep">
       <v-window-item v-for="(obj, index) in this.unmappedObjectives" v-bind:key="`obj-${index}`" :step="index + 1">
         <v-card>
@@ -43,6 +48,10 @@
         append-outer-icon="mdi-clipboard"
         @click:append-outer="copyFormattedObjectivesToClipboard"
     ></v-textarea>
+    </div>
+    <div v-else>
+      <p>No unmapped objectives</p>
+    </div>
   </v-container>
 </template>
 
@@ -56,7 +65,7 @@ export default {
   components: {MappingDebuggerObjective},
   props: {},
   data: () => ({
-    mappingStep: 1,
+    mappingStep: 0,
     formattedObjectives: "",
     unmappedObjectives: null,
     activityTypes: [],

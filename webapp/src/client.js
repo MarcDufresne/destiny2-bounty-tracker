@@ -42,6 +42,12 @@ const DEF_GENDER = {
     2204441813: "Female",
 };
 
+const DEF_CLASS = {
+    671679327: "Hunter",
+    2271682572: "Warlock",
+    3655393761: "Titan",
+}
+
 let hashes = {}  // hash: timestamp
 
 
@@ -117,9 +123,10 @@ export const Client = {
 
             const charRace = DEF_RACE[userProfileData.Response.characters.data[charId].raceHash];
             const charGender = DEF_GENDER[userProfileData.Response.characters.data[charId].genderHash];
+            const charClass = DEF_CLASS[userProfileData.Response.characters.data[charId].classHash];
             const charLight = userProfileData.Response.characters.data[charId].light;
 
-            const charDesc = `${charLight} ${charRace} ${charGender}`;
+            const charDesc = `${charLight} ${charRace} ${charGender} ${charClass}`;
 
             const charItems = userProfileData.Response.characterInventories.data[charId].items;
             const charObjectives = userProfileData.Response.itemComponents.objectives.data;

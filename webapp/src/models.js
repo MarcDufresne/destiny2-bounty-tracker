@@ -45,7 +45,7 @@ export const WeaponType = {
     POWER_GRENADE_LAUNCHER: "power_grenade_launcher",
     MACHINE_GUN: "machine_gun",
     SWORD: "sword",
-    ROCKER_LAUNCHER: "rocket_launcher",
+    ROCKET_LAUNCHER: "rocket_launcher",
 };
 
 export const DamageType = {

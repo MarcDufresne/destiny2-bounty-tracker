@@ -69,7 +69,7 @@ export const OBJECTIVE_MAPPING = {
     "3708389402": Models.ObjectiveMapping(DestinationType.NESSUS, null),  // v400.bounties.outlaws.outlaws_c.waterway_dun_a
     "3502292531": Models.ObjectiveMapping(DestinationType.EDZ, null),  // v400.bounties.destinations.edz.daily.kills
     "2180749889": Models.ObjectiveMapping(ActivityType.CRUCIBLE, AbilityType.SUPER),  // bounties.crucible.daily.supers_cast
-    "2498252692": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.ROCKER_LAUNCHER),  // bounties.gunsmith.daily.rocket_launcher
+    "2498252692": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.ROCKET_LAUNCHER),  // bounties.gunsmith.daily.rocket_launcher
     "985947756": Models.ObjectiveMapping(ActivityType.CRUCIBLE, null),  // bounties.crucible.daily.breakthrough_vault
     "1926521839": Models.ObjectiveMapping(ActivityType.EVENT, DamageType.SOLAR),  // v410.bounties.crimson_days.daily_kills.bounty2
     "2954043357": Models.ObjectiveMapping(ActivityType.EVENT, AbilityType.ORBS),  // v410.bounties.crimson_days.daily_kills.bounty3
@@ -142,7 +142,7 @@ export const OBJECTIVE_MAPPING = {
     "3412971376": Models.ObjectiveMapping(ActivityType.CRUCIBLE, null),  // bounties.crucible.daily.clash_kills
     "2435403357": Models.ObjectiveMapping(ActivityType.EVENT, null),  // events.dawning.bounties.daily.bounty18
     "2943001378": Models.ObjectiveMapping(ActivityType.EVENT, AbilityType.SUPER),  // events.dawning.bounties.daily.bounty19
-    "1627439765": Models.ObjectiveMapping(ActivityType.EVENT, WeaponType.ROCKER_LAUNCHER),  // events.dawning.bounties.daily.bounty10
+    "1627439765": Models.ObjectiveMapping(ActivityType.EVENT, WeaponType.ROCKET_LAUNCHER),  // events.dawning.bounties.daily.bounty10
     "416527450": Models.ObjectiveMapping(ActivityType.EVENT, AbilityType.ORBS),  // events.dawning.bounties.daily.bounty11
     "4212138147": Models.ObjectiveMapping(ActivityType.EVENT, DamageType.VOID),  // events.dawning.bounties.daily.bounty12
     "1846417152": Models.ObjectiveMapping(ActivityType.EVENT, DamageType.SOLAR),  // events.dawning.bounties.daily.bounty13
@@ -193,7 +193,7 @@ export const OBJECTIVE_MAPPING = {
     "385545752": Models.ObjectiveMapping(DestinationType.NESSUS, DamageType.ARC),  // v400.bounties.destinations.myriad.daily.arc_kills
     "1655762139": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.PULSE_RIFLE),  // bounties.gunsmith.daily.pulse_rifle
     "1240307486": Models.ObjectiveMapping(ActivityType.GAMBIT, AbilityType.FINISHER),  // bounties.gambit.daily.finisher_kills
-    "238063032": Models.ObjectiveMapping(ActivityType.STRIKES, WeaponType.ROCKER_LAUNCHER),  // bounties.strikes.daily.rocket_launcher_kills
+    "238063032": Models.ObjectiveMapping(ActivityType.STRIKES, WeaponType.ROCKET_LAUNCHER),  // bounties.strikes.daily.rocket_launcher_kills
     "209318445": Models.ObjectiveMapping(ActivityType.CRUCIBLE, null),  // bounties.crucible.daily.survival_rounds
     "3992875351": Models.ObjectiveMapping(ActivityType.CRUCIBLE, null),  // bounties.crucible.daily.momentum_matches
     "2771003444": Models.ObjectiveMapping(ActivityType.CRUCIBLE, null),  // bounties.crucible.daily.control_advantage
@@ -457,7 +457,7 @@ export const OBJECTIVE_MAPPING = {
     "1807325541": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.SCOUT_RIFLE),  // bounties.gunsmith.repeatable.scout_rifle
     "3911589652": Models.ObjectiveMapping(ActivityType.TRIALS, WeaponType.HAND_CANNON),  // trials.bounties.daily.hand_cannon
     "2471790851": Models.ObjectiveMapping(ActivityType.CRUCIBLE, null),  // bounties.crucible.repeatable.titan_kills
-    "2640558567": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.ROCKER_LAUNCHER),  // bounties.gunsmith.repeatable.rocket_launcher
+    "2640558567": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.ROCKET_LAUNCHER),  // bounties.gunsmith.repeatable.rocket_launcher
     "2571319469": Models.ObjectiveMapping(ActivityType.TRIALS, null),  // trials.bounties.weekly.vendor_ranks
     "1298070959": Models.ObjectiveMapping(ActivityType.TRIALS, WeaponType.PULSE_RIFLE),  // trials.bounties.daily.pulse_rifle
     "1613167470": Models.ObjectiveMapping(ActivityType.TRIALS, null),  // trials.bounties.repeatable.matches
@@ -650,5 +650,70 @@ export const OBJECTIVE_MAPPING = {
     "334135691": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.SHOTGUN),  // seasons.season12.ritual.bounties.shrines.daily.special_02
     "3956624232": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.TRACE_RIFLE),  // seasons.season12.ritual.bounties.shrines.daily.special_03
     "335733929": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.SPECIAL),  // seasons.season12.ritual.bounties.shrines.daily.special_04
+    "1507435710": Models.ObjectiveMapping(ActivityType.GLOBAL, DamageType.ARC),  // seasons.season12.ritual.bounties.shrines.daily.special_05
+    "946392743": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.SPECIAL_GRENADE_LAUNCHER),  // seasons.season12.ritual.bounties.shrines.daily.special_06
+    "3706093864": Models.ObjectiveMapping(ActivityType.GLOBAL, null),  // events.dawning.bounties.repeatable.bake_chocolate_ship
+    "2787061562": Models.ObjectiveMapping(ActivityType.GLOBAL, null),  // events.dawning.bounties.repeatable.bake_blades
+    "1910150221": Models.ObjectiveMapping(DestinationType.EUROPA, AbilityType.GRENADE),  // europa.bounties.activities.freeroam.repeatable.grenade
+    "2730136872": Models.ObjectiveMapping(ActivityType.GLOBAL, null),  // events.dawning.bounties.repeatable.bake_shadough
+    "13215836": Models.ObjectiveMapping(DestinationType.EUROPA, WeaponType.ROCKET_LAUNCHER),  // europa.bounties.activities.freeroam.repeatable.rocket_launcher
+    "826238995": Models.ObjectiveMapping(DestinationType.EUROPA, AbilityType.MELEE),  // europa.bounties.activities.freeroam.repeatable.melee
+    "899723806": Models.ObjectiveMapping(ActivityType.GLOBAL, null),  // events.dawning.bounties.repeatable.bake_gjallardoodles
+    "2531494905": Models.ObjectiveMapping(DestinationType.EUROPA, null),  // europa.bounties.activities.freeroam.daily4.bounty8
+    "3911730190": Models.ObjectiveMapping(DestinationType.EUROPA, null),  // europa.bounties.activities.freeroam.daily4.bounty9
+    "2602535781": Models.ObjectiveMapping(DestinationType.EUROPA, null),  // europa.bounties.activities.freeroam.daily4.bounty4
+    "3820356842": Models.ObjectiveMapping(DestinationType.EUROPA, null),  // europa.bounties.activities.freeroam.daily4.bounty5
+    "1529951155": Models.ObjectiveMapping(DestinationType.EUROPA, null),  // europa.bounties.activities.freeroam.daily4.bounty6
+    "2428192848": Models.ObjectiveMapping(DestinationType.EUROPA, null),  // europa.bounties.activities.freeroam.daily4.bounty7
+    "4294050769": Models.ObjectiveMapping(DestinationType.EUROPA, null),  // europa.bounties.activities.freeroam.daily4.bounty0
+    "2479580806": Models.ObjectiveMapping(DestinationType.EUROPA, null),  // europa.bounties.activities.freeroam.daily4.bounty1
+    "2921049647": Models.ObjectiveMapping(DestinationType.EUROPA, null),  // europa.bounties.activities.freeroam.daily4.bounty2
+    "3388281516": Models.ObjectiveMapping(DestinationType.EUROPA, null),  // europa.bounties.activities.freeroam.daily4.bounty3
+    "2954146662": Models.ObjectiveMapping(DestinationType.COSMODROME, null),  // cosmodrome.bounties.daily.bounty12
+    "3288629293": Models.ObjectiveMapping(ActivityType.GLOBAL, null),  // events.dawning.bounties.repeatable.bake_shortbread
+    "2934399593": Models.ObjectiveMapping(DestinationType.EUROPA, WeaponType.ENERGY),  // europa.bounties.activities.freeroam.repeatable.energy
+    "1588320138": Models.ObjectiveMapping(DestinationType.EUROPA, AbilityType.SUPER),  // europa.bounties.activities.freeroam.repeatable.super
+    "3065762079": Models.ObjectiveMapping(DestinationType.EUROPA, WeaponType.SNIPER_RIFLE),  // europa.bounties.activities.freeroam.repeatable.sniper_rifle
+    "2257931918": Models.ObjectiveMapping(DestinationType.EUROPA, WeaponType.HAND_CANNON),  // europa.bounties.activities.freeroam.repeatable.hand_cannon
+    "1610417662": Models.ObjectiveMapping(ActivityType.GLOBAL, null),  // events.dawning.bounties.repeatable.bake_snowballs
+    "766548461": Models.ObjectiveMapping(ActivityType.GLOBAL, null),  // events.dawning.bounties.repeatable.bake_thousand_layer
+    "1924344776": Models.ObjectiveMapping(ActivityType.GLOBAL, null),  // events.dawning.bounties.repeatable.bake_tapioca
+    "2340266325": Models.ObjectiveMapping(DestinationType.EUROPA, AbilityType.FINISHER),  // europa.bounties.activities.freeroam.repeatable.finisher
+    "32151362": Models.ObjectiveMapping(ActivityType.GLOBAL, null),  // events.dawning.bounties.repeatable.bake_oatmeal
+    "3074522672": Models.ObjectiveMapping(ActivityType.GLOBAL, null),  // events.dawning.bounties.repeatable.bake_mooncake
+    "2355093300": Models.ObjectiveMapping(DestinationType.EUROPA, WeaponType.POWER),  // europa.bounties.activities.freeroam.repeatable.power
+    "3659981173": Models.ObjectiveMapping(ActivityType.GLOBAL, null),  // events.dawning.bounties.repeatable.bake_donut_holes
+    "2043810635": Models.ObjectiveMapping(DestinationType.EUROPA, DamageType.VOID),  // europa.bounties.activities.freeroam.repeatable.void
+    "2018850901": Models.ObjectiveMapping(ActivityType.GLOBAL, null),  // events.dawning.bounties.repeatable.bake_crossfire
+    "2127781189": Models.ObjectiveMapping(ActivityType.GLOBAL, null),  // events.dawning.bounties.repeatable.bake_lavendar_ribbon
+    "1538510206": Models.ObjectiveMapping(ActivityType.GLOBAL, DamageType.SOLAR),  // seasons.season12.ritual.bounties.shrines.daily.primary_08
+    "2963473301": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.SIDEARM),  // seasons.season12.ritual.bounties.shrines.daily.primary_05
+    "1752560986": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.BOW),  // seasons.season12.ritual.bounties.shrines.daily.primary_04
+    "1253204387": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.PRIMARY),  // seasons.season12.ritual.bounties.shrines.daily.primary_07
+    "3182450688": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.SUBMACHINE_GUN),  // seasons.season12.ritual.bounties.shrines.daily.primary_06
+    "1635715137": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.SCOUT_RIFLE),  // seasons.season12.ritual.bounties.shrines.daily.primary_01
+    "4062753846": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.HAND_CANNON),  // seasons.season12.ritual.bounties.shrines.daily.primary_00
+    "3422972447": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.AUTO_RIFLE),  // seasons.season12.ritual.bounties.shrines.daily.primary_03
+    "1464649948": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.PULSE_RIFLE),  // seasons.season12.ritual.bounties.shrines.daily.primary_02
+    "2768730805": Models.ObjectiveMapping(DestinationType.EUROPA, WeaponType.SWORD),  // europa.bounties.activities.freeroam.daily3.bounty12
+    "3216366458": Models.ObjectiveMapping(DestinationType.EUROPA, WeaponType.FUSION_RIFLE),  // europa.bounties.activities.freeroam.daily3.bounty13
+    "1352016323": Models.ObjectiveMapping(DestinationType.EUROPA, WeaponType.ROCKET_LAUNCHER),  // europa.bounties.activities.freeroam.daily3.bounty10
+    "1295597088": Models.ObjectiveMapping(DestinationType.EUROPA, WeaponType.NORMAL_GRENADE_LAUNCHER),  // europa.bounties.activities.freeroam.daily3.bounty11
+    "3946138815": Models.ObjectiveMapping(DestinationType.EUROPA, WeaponType.LINEAR_FUSION_RIFLE),  // europa.bounties.activities.freeroam.daily3.bounty14
+    "1694364924": Models.ObjectiveMapping(DestinationType.EUROPA, WeaponType.TRACE_RIFLE),  // europa.bounties.activities.freeroam.daily3.bounty15
+    "939630775": Models.ObjectiveMapping(ActivityType.GLOBAL, null),  // events.dawning.bounties.repeatable.bake_butter
+    "2022588239": Models.ObjectiveMapping(DestinationType.EUROPA, WeaponType.AUTO_RIFLE),  // europa.bounties.activities.freeroam.repeatable.auto_rifle
+    "4007527654": Models.ObjectiveMapping(DestinationType.EUROPA, WeaponType.FUSION_RIFLE),  // europa.bounties.activities.freeroam.repeatable.fusion_rifle
+    "3887297066": Models.ObjectiveMapping(ActivityType.GLOBAL, null),  // events.dawning.bounties.repeatable.bake_hackberry
+    "947439189": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.ROCKET_LAUNCHER),  // seasons.season12.ritual.bounties.shrines.daily.power_02
+    "3579719962": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.MACHINE_GUN),  // seasons.season12.ritual.bounties.shrines.daily.power_03
+    "1092607587": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.NORMAL_GRENADE_LAUNCHER),  // seasons.season12.ritual.bounties.shrines.daily.power_00
+    "4055726784": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.SWORD),  // seasons.season12.ritual.bounties.shrines.daily.power_01
+    "3664238337": Models.ObjectiveMapping(ActivityType.GLOBAL, DamageType.VOID),  // seasons.season12.ritual.bounties.shrines.daily.power_06
+    "2418709727": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.LINEAR_FUSION_RIFLE),  // seasons.season12.ritual.bounties.shrines.daily.power_04
+    "1303949980": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.POWER),  // seasons.season12.ritual.bounties.shrines.daily.power_05
+    "43313268": Models.ObjectiveMapping(DestinationType.EUROPA, WeaponType.NORMAL_GRENADE_LAUNCHER),  // europa.bounties.activities.freeroam.repeatable.grenade_launcher
+    "1690179622": Models.ObjectiveMapping(ActivityType.GLOBAL, null),  // events.dawning.bounties.repeatable.bake_coldsnaps
+    "73310669": Models.ObjectiveMapping(ActivityType.GLOBAL, null),  // events.dawning.bounties.repeatable.bake_strange
 
 };
