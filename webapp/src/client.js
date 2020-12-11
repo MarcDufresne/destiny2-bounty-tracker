@@ -118,6 +118,7 @@ export const Client = {
         const characters = Object.keys(userProfileData.Response.characters.data);
 
         let accountObjectives = {};
+        let charInfo = {};
         for (const charIdIndex in characters) {
             const charId = characters[charIdIndex];
 
@@ -125,8 +126,17 @@ export const Client = {
             const charGender = DEF_GENDER[userProfileData.Response.characters.data[charId].genderHash];
             const charClass = DEF_CLASS[userProfileData.Response.characters.data[charId].classHash];
             const charLight = userProfileData.Response.characters.data[charId].light;
+            const charEmblem = userProfileData.Response.characters.data[charId].emblemBackgroundPath;
+            const charEmblemSmall = userProfileData.Response.characters.data[charId].emblemPath;
 
-            const charDesc = `${charLight} ${charRace} ${charGender} ${charClass}`;
+            charInfo[charId] = {
+                race: charRace,
+                gender: charGender,
+                class: charClass,
+                light: charLight,
+                emblem: charEmblem,
+                emblemSmall: charEmblemSmall,
+            }
 
             const charItems = userProfileData.Response.characterInventories.data[charId].items;
             const charObjectives = userProfileData.Response.itemComponents.objectives.data;
@@ -150,18 +160,6 @@ export const Client = {
                     const obj = charObjectives[item.itemInstanceId].objectives[objIndex];
                     const objectiveHash = obj.objectiveHash;
                     const objDetails = OBJECTIVE_MAPPING[objectiveHash];
-
-                    if (!objDetails) {
-                        console.log(
-                            `WARNING: No mapping found for Objective ${objectiveHash}
-                            DETAILS =======================
-                            Display Name: ${DEF_INVENTORY_ITEM_LITE[item.itemHash].itemTypeDisplayName}
-                            Desc: ${DEF_OBJECTIVE[objectiveHash].progressDescription}
-                            Bounty Name: ${DEF_INVENTORY_ITEM_LITE[item.itemHash].displayProperties.name}
-                            Bounty Desc: ${DEF_INVENTORY_ITEM_LITE[item.itemHash].displayProperties.description}
-                            ===============================`
-                        )
-                    }
 
                     const activityType = objDetails ? objDetails.activity : null;
                     objectives.push(
@@ -189,9 +187,9 @@ export const Client = {
                 categorizedObjectives[objective.category].push(objective);
             }
 
-            accountObjectives[charDesc] = categorizedObjectives
+            accountObjectives[charId] = categorizedObjectives
         }
 
-        return [accountObjectives, moment().unix()];
+        return [accountObjectives, moment().unix(), charInfo];
     }
 };
