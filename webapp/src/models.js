@@ -14,20 +14,20 @@ export const ActivityType = {
 
 export const DestinationType = {
     EDZ: "edz",
-    MARS: "mars",
-    IO: "io",
-    TITAN: "titan",
-    MERCURY: "mercury",
     MOON: "moon",
     TANGLED_SHORE: "tangled_shore",
     DREAMING_CITY: "dreaming_city",
     NESSUS: "nessus",
+    EUROPA: "europa",
+    COSMODROME: "cosmodrome",
 };
 
 export const WeaponType = {
     KINETIC: "kinetic",
     ENERGY: "energy",
     POWER: "power",
+    PRIMARY: "primary",
+    SPECIAL: "special",
     HAND_CANNON: "hand_cannon",
     SUBMACHINE_GUN: "submachine_gun",
     AUTO_RIFLE: "auto_rifle",
@@ -45,13 +45,14 @@ export const WeaponType = {
     POWER_GRENADE_LAUNCHER: "power_grenade_launcher",
     MACHINE_GUN: "machine_gun",
     SWORD: "sword",
-    ROCKER_LAUNCHER: "rocket_launcher",
+    ROCKET_LAUNCHER: "rocket_launcher",
 };
 
 export const DamageType = {
     SOLAR: "solar",
     ARC: "arc",
     VOID: "void",
+    STASIS: "stasis",
     PRECISION: "precision",
 };
 

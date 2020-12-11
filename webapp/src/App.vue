@@ -8,7 +8,7 @@
             <v-toolbar-title>Destiny 2 Bounty Tracker</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-btn v-if="devMode" icon>
-                <v-icon v-on:click="findUnmappedObjectives()">mdi-clock</v-icon>
+                <v-icon v-on:click="toggleDebug()">mdi-clock</v-icon>
             </v-btn>
             <small>Updated {{ lastUpdate }}</small>
             <v-btn v-if="loggedIn" icon>
@@ -21,6 +21,7 @@
         </v-app-bar>
 
         <v-content>
+            <v-row v-if="showDebug"><MappingDebugger/></v-row>
             <v-row v-if="loggedIn" align="center" justify="center">
                 <v-expansion-panels>
                     <v-expansion-panel>
@@ -100,6 +101,7 @@
     import {ActivityType, DestinationType} from "./models";
     import Characters from './components/Characters';
     import {ACTIVITY_TYPES_FORMAT} from "./formatting";
+    import MappingDebugger from "@/components/Debug/MappingDebugger";
 
     const LOCAL_STORAGE_STATE_KEY = "oauthState";
 
@@ -112,6 +114,7 @@
 
         components: {
             Characters,
+            MappingDebugger
         },
 
         data: () => ({
@@ -126,6 +129,7 @@
             devMode: process.env.NODE_ENV === "development",
             lastUpdate: "never",
             lastUpdateTimestamp: moment().unix(),
+            showDebug: false
         }),
         created() {
             this.$vuetify.theme.dark = true;
@@ -239,8 +243,8 @@
                 });
                 this.loggedIn = this.isLoggedIn();
             },
-            findUnmappedObjectives() {
-                DevUtils.findUnmappedObjectives();
+            toggleDebug() {
+                this.showDebug = !this.showDebug;
             },
             formatUpdateText() {
                 this.lastUpdate = moment.unix(this.lastUpdateTimestamp).fromNow();

@@ -12,14 +12,12 @@ export const ACTIVITY_TYPES_FORMAT = {
     "iron_banner": "Iron Banner",
     "trials": "Trials",
     "edz": "EDZ",
-    "mars": "Mars",
-    "io": "IO",
-    "titan": "Titan",
-    "mercury": "Mercury",
     "moon": "Moon",
     "tangled_shore": "Tangled Shore",
     "dreaming_city": "Dreaming City",
-    "nessus": "Nessus"
+    "nessus": "Nessus",
+    "europa": "Europa",
+    "cosmodrome": "Cosmodrome",
 };
 
 export const PROGRESS_DESC_SYMBOLS = {
@@ -36,6 +34,7 @@ export const PROGRESS_DESC_SYMBOLS = {
     "Rocket Launcher": "",
     "Sidearm": "",
     "Grenade Launcher": "",
+    "Grenade Launcher (Special)": "",
     "Power Grenade Launcher": "",
     "Trace Rifle": "",
     "Linear Fusion Rifle": "",
@@ -48,6 +47,7 @@ export const PROGRESS_DESC_SYMBOLS = {
     "Solar": "",
     "Arc": "",
     "Void": "",
+    "Stasis": "",
     "Grenade": "",
     "Melee": "",
 };
@@ -57,6 +57,8 @@ export const OBJECTIVE_TYPES_FORMAT = {
     "kinetic": "Kinetic Weapons",
     "energy": "Energy Weapons",
     "power": "Power Weapons",
+    "primary": "Primary Ammo",
+    "special": "Special Ammo",
     "hand_cannon": "Hand Cannon",
     "submachine_gun": "Submachine Gun",
     "auto_rifle": "Auto Rifle",
@@ -69,7 +71,8 @@ export const OBJECTIVE_TYPES_FORMAT = {
     "shotgun": "Shotgun",
     "trace_rifle": "Trace Rifle",
     "bow": "Bow",
-    "normal_grenade_launcher": "Grenade Launcher (Kinetic or Energy)",
+    "normal_grenade_launcher": "Grenade Launcher",
+    "special_grenade_launcher": "Grenade Launcher (Special)",
     "power_grenade_launcher": "Grenade Launcher (Power)",
     "machine_gun": "Machine Gun",
     "sword": "Sword",
