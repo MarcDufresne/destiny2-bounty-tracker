@@ -41,6 +41,9 @@
           :value="index"
       >
         <v-card flat>
+          <Quests :quests="quests[char_name]" />
+        </v-card>
+        <v-card flat>
           <v-card-text class="pa-0">
             <CharacterObjectives
                 :objectives="objectives"
@@ -65,10 +68,11 @@
 import {Client} from "@/client";
 import {LocalStorage, LOCAL_STORAGE_ACCESS_TOKEN_KEY} from "@/utils";
 import CharacterObjectives from "./CharacterObjectives";
+import Quests from "@/components/Quests";
 
 export default {
-  name: "Bounties",
-  components: {CharacterObjectives},
+  name: "Characters",
+  components: {Quests, CharacterObjectives},
   props: {
     accessToken: String,
     autoRefresh: Boolean,
@@ -79,6 +83,7 @@ export default {
     tab_model: null,
     objectives: {},
     charInfo: {},
+    quests: {},
   }),
   async mounted() {
     await this.getObjectives();
@@ -102,6 +107,7 @@ export default {
         this.objectives = newObjectives[0];
         this.$emit('objectiveUpdate', newObjectives[1]);
         this.charInfo = newObjectives[2];
+        this.quests = newObjectives[3];
       }
     },
     async interval() {

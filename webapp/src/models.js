@@ -90,6 +90,15 @@ export const Models = {
             expiration: expiration,
         }
     },
+    Quest(questId, name, description, icon, objectives) {
+        return {
+            questId: questId,
+            name: name,
+            description: description,
+            icon: icon,
+            objectives: objectives,
+        }
+    },
     Objective(
         objectiveId, progressDescription, progress, completionValue,
         completed, category, activity, bounty, iconLink

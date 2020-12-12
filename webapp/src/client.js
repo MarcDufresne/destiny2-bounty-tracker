@@ -81,6 +81,44 @@ function cleanupHashes() {
 }
 
 
+const CATEGORY_HASH_QUEST_STEP = 16;
+
+
+function getCategory(item) {
+    if (!item.hasOwnProperty("itemHash")) {
+        return null;
+    }
+
+    const itemHash = item.itemHash;
+    const itemDef = DEF_INVENTORY_ITEM_LITE[itemHash];
+
+    if (
+        (
+            itemDef.hasOwnProperty("itemCategoryHashes")
+            && itemDef.itemCategoryHashes.includes(CATEGORY_HASH_QUEST_STEP))
+        || (
+            itemDef.hasOwnProperty("objectives")
+            && itemDef.objectives.hasOwnProperty("questlineItemHash"))
+    ) {
+        if (itemDef.hasOwnProperty("inventory")
+            && itemDef.inventory.hasOwnProperty("bucketTypeHash")
+            && itemDef.inventory.bucketTypeHash === 1345459588
+        ) {
+            return "Quest"
+        }
+        return "Milestone";
+    }
+
+    if (
+        item.hasOwnProperty("expirationDate")
+    ) {
+        return "Bounty";
+    }
+
+    return null;
+}
+
+
 export const Client = {
     async getObjectives(accessToken) {
         cleanupHashes();
@@ -100,7 +138,7 @@ export const Client = {
         const userProfileResp = await ApiService.get(
             `/Destiny2/${membershipType}/Profile/${primaryMembership}/`,
             accessToken,
-            {components: "200,201,300,301,900"}
+            {components: "104,200,201,300,301,900"}
         );
         const userProfileData = userProfileResp.data;
 
@@ -118,6 +156,7 @@ export const Client = {
         const characters = Object.keys(userProfileData.Response.characters.data);
 
         let accountObjectives = {};
+        let accountQuests = {};
         let charInfo = {};
         for (const charIdIndex in characters) {
             const charId = characters[charIdIndex];
@@ -140,41 +179,76 @@ export const Client = {
 
             const charItems = userProfileData.Response.characterInventories.data[charId].items;
             const charObjectives = userProfileData.Response.itemComponents.objectives.data;
+            const questCharObjectives = userProfileData.Response.characterUninstancedItemComponents[charId].objectives.data;
 
             let objectives = [];
+            let whatever = {};
+            let quests = [];
             for (const itemIndex in charItems) {
                 const item = charItems[itemIndex];
-                if (!item.hasOwnProperty("expirationDate")) {
-                    continue
-                }
 
-                const bounty = Models.Bounty(
-                    item.itemHash,
-                    item.itemInstanceId,
-                    DEF_INVENTORY_ITEM_LITE[item.itemHash].displayProperties.name,
-                    DEF_INVENTORY_ITEM_LITE[item.itemHash].displayProperties.description,
-                    item.expirationDate
-                );
+                const itemCategory = getCategory(item);
 
-                for (const objIndex in charObjectives[item.itemInstanceId].objectives) {
-                    const obj = charObjectives[item.itemInstanceId].objectives[objIndex];
-                    const objectiveHash = obj.objectiveHash;
-                    const objDetails = OBJECTIVE_MAPPING[objectiveHash];
+                whatever[item.itemHash] = DEF_INVENTORY_ITEM_LITE[item.itemHash];
 
-                    const activityType = objDetails ? objDetails.activity : null;
-                    objectives.push(
-                        Models.Objective(
-                            objectiveHash,
-                            DEF_OBJECTIVE[objectiveHash].progressDescription,
-                            obj.progress,
-                            obj.completionValue,
-                            obj.completed,
-                            objDetails ? objDetails.category : null,
-                            activityType,
-                            bounty,
-                            DEF_INVENTORY_ITEM_LITE[item.itemHash].displayProperties.icon
+                if (itemCategory === "Bounty") {
+                    const bounty = Models.Bounty(
+                        item.itemHash,
+                        item.itemInstanceId,
+                        DEF_INVENTORY_ITEM_LITE[item.itemHash].displayProperties.name,
+                        DEF_INVENTORY_ITEM_LITE[item.itemHash].displayProperties.description,
+                        item.expirationDate
+                    );
+
+                    for (const objIndex in charObjectives[item.itemInstanceId].objectives) {
+                        const obj = charObjectives[item.itemInstanceId].objectives[objIndex];
+                        const objectiveHash = obj.objectiveHash;
+                        const objDetails = OBJECTIVE_MAPPING[objectiveHash];
+
+                        const activityType = objDetails ? objDetails.activity : null;
+                        objectives.push(
+                            Models.Objective(
+                                objectiveHash,
+                                DEF_OBJECTIVE[objectiveHash].progressDescription,
+                                obj.progress,
+                                obj.completionValue,
+                                obj.complete,
+                                objDetails ? objDetails.category : null,
+                                activityType,
+                                bounty,
+                                DEF_INVENTORY_ITEM_LITE[item.itemHash].displayProperties.icon
+                            )
                         )
-                    )
+                    }
+                } else if (itemCategory === "Quest") {
+                    let questObjectives = [];
+                    console.log(item.itemHash);
+                    if (questCharObjectives.hasOwnProperty(item.itemHash)) {
+                        objectives = questCharObjectives[item.itemHash].objectives
+                    } else {
+                        objectives = charObjectives[item.itemInstanceId].objectives
+                    }
+                    for (const objIndex in objectives) {
+                        const objective = objectives[objIndex];
+                        const objectiveHash = objective.objectiveHash;
+
+                        questObjectives.push(
+                            Models.Objective(
+                                objectiveHash,
+                                DEF_OBJECTIVE[objectiveHash].progressDescription,
+                                objective.progress,
+                                objective.completionValue,
+                                objective.complete,
+                            )
+                        )
+                    }
+                    quests.push(Models.Quest(
+                        item.itemHash,
+                        DEF_INVENTORY_ITEM_LITE[item.itemHash].displayProperties.name,
+                        DEF_INVENTORY_ITEM_LITE[item.itemHash].displayProperties.description,
+                        DEF_INVENTORY_ITEM_LITE[item.itemHash].displayProperties.icon,
+                        questObjectives
+                    ));
                 }
             }
 
@@ -188,8 +262,12 @@ export const Client = {
             }
 
             accountObjectives[charId] = categorizedObjectives
+
+            accountQuests[charId] = quests;
+
+            console.log(whatever);
         }
 
-        return [accountObjectives, moment().unix(), charInfo];
+        return [accountObjectives, moment().unix(), charInfo, accountQuests];
     }
 };
