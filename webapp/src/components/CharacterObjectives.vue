@@ -96,7 +96,6 @@ export default {
       for (let [categoryName, categoryObjectives] of Object.entries(this.objectives)) {
         for (const objectiveIndex in categoryObjectives) {
           if (categoryObjectives[objectiveIndex].objectiveId === objectiveId) {
-            console.log(categoryObjectives[objectiveIndex].objectiveId);
             return categoryObjectives[objectiveIndex];
           }
         }
@@ -112,7 +111,6 @@ export default {
           fullObjectives.push(objectiveFromID);
         }
       }
-      console.log(fullObjectives);
       return fullObjectives;
     }
   }

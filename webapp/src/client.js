@@ -138,7 +138,7 @@ export const Client = {
         const userProfileResp = await ApiService.get(
             `/Destiny2/${membershipType}/Profile/${primaryMembership}/`,
             accessToken,
-            {components: "104,200,201,300,301,900"}
+            {components: "200,201,300,301,900"}
         );
         const userProfileData = userProfileResp.data;
 
@@ -182,14 +182,14 @@ export const Client = {
             const questCharObjectives = userProfileData.Response.characterUninstancedItemComponents[charId].objectives.data;
 
             let objectives = [];
-            let whatever = {};
             let quests = [];
+            let inventoryDefinitions = {};
             for (const itemIndex in charItems) {
                 const item = charItems[itemIndex];
 
                 const itemCategory = getCategory(item);
 
-                whatever[item.itemHash] = DEF_INVENTORY_ITEM_LITE[item.itemHash];
+                inventoryDefinitions[item.itemHash] = DEF_INVENTORY_ITEM_LITE[item.itemHash];
 
                 if (itemCategory === "Bounty") {
                     const bounty = Models.Bounty(
@@ -222,14 +222,14 @@ export const Client = {
                     }
                 } else if (itemCategory === "Quest") {
                     let questObjectives = [];
-                    console.log(item.itemHash);
+                    let questObjective;
                     if (questCharObjectives.hasOwnProperty(item.itemHash)) {
-                        objectives = questCharObjectives[item.itemHash].objectives
+                        questObjective = questCharObjectives[item.itemHash].objectives
                     } else {
-                        objectives = charObjectives[item.itemInstanceId].objectives
+                        questObjective = charObjectives[item.itemInstanceId].objectives
                     }
-                    for (const objIndex in objectives) {
-                        const objective = objectives[objIndex];
+                    for (const objIndex in questObjective) {
+                        const objective = questObjective[objIndex];
                         const objectiveHash = objective.objectiveHash;
 
                         questObjectives.push(
@@ -262,10 +262,9 @@ export const Client = {
             }
 
             accountObjectives[charId] = categorizedObjectives
-
             accountQuests[charId] = quests;
 
-            console.log(whatever);
+            devConsoleLog(inventoryDefinitions);
         }
 
         return [accountObjectives, moment().unix(), charInfo, accountQuests];

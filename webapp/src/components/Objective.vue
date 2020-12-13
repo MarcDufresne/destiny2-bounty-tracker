@@ -70,8 +70,8 @@
     </v-hover>
 </template>
 <script>
-    import {Time} from "../utils";
-    import {ACTIVITY_TYPES_FORMAT, PROGRESS_DESC_SYMBOLS} from "../formatting";
+    import {Time} from "@/utils";
+    import {ACTIVITY_TYPES_FORMAT, PROGRESS_DESC_SYMBOLS} from "@/formatting";
 
     export default {
         name: 'Objective',
