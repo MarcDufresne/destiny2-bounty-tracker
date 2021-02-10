@@ -715,5 +715,40 @@ export const OBJECTIVE_MAPPING = {
     "43313268": Models.ObjectiveMapping(DestinationType.EUROPA, WeaponType.NORMAL_GRENADE_LAUNCHER),  // europa.bounties.activities.freeroam.repeatable.grenade_launcher
     "1690179622": Models.ObjectiveMapping(ActivityType.GLOBAL, null),  // events.dawning.bounties.repeatable.bake_coldsnaps
     "73310669": Models.ObjectiveMapping(ActivityType.GLOBAL, null),  // events.dawning.bounties.repeatable.bake_strange
+    "2793259717": Models.ObjectiveMapping(ActivityType.SEASONAL, DamageType.VOID),  // seasons.season13.ritual.bounties.war_table.repeatable.bounty10
+    "798506698": Models.ObjectiveMapping(ActivityType.SEASONAL, DamageType.ARC),  // seasons.season13.ritual.bounties.war_table.repeatable.bounty11
+    "3877237651": Models.ObjectiveMapping(ActivityType.SEASONAL, WeaponType.KINETIC),  // seasons.season13.ritual.bounties.war_table.repeatable.bounty12
+    "3839521584": Models.ObjectiveMapping(ActivityType.SEASONAL, WeaponType.ENERGY),  // seasons.season13.ritual.bounties.war_table.repeatable.bounty13
+    "428638001": Models.ObjectiveMapping(ActivityType.SEASONAL, WeaponType.POWER),  // seasons.season13.ritual.bounties.war_table.repeatable.bounty14
+    "2784596333": Models.ObjectiveMapping(ActivityType.SEASONAL, DamageType.SOLAR),  // seasons.season13.ritual.bounties.war_table.repeatable.bounty9
+    "3026477106": Models.ObjectiveMapping(ActivityType.SEASONAL, DamageType.ARC),  // seasons.season13.ritual.bounties.war_table.repeatable.bounty8
+    "1476935973": Models.ObjectiveMapping(ActivityType.SEASONAL, WeaponType.ROCKET_LAUNCHER),  // seasons.season13.ritual.bounties.war_table.repeatable.bounty1
+    "4283506858": Models.ObjectiveMapping(ActivityType.SEASONAL, WeaponType.BOW),  // seasons.season13.ritual.bounties.war_table.repeatable.bounty0
+    "1846665843": Models.ObjectiveMapping(ActivityType.SEASONAL, WeaponType.SUBMACHINE_GUN),  // seasons.season13.ritual.bounties.war_table.repeatable.bounty3
+    "1034831632": Models.ObjectiveMapping(ActivityType.SEASONAL, WeaponType.SNIPER_RIFLE),  // seasons.season13.ritual.bounties.war_table.repeatable.bounty2
+    "1474108049": Models.ObjectiveMapping(ActivityType.SEASONAL, WeaponType.SIDEARM),  // seasons.season13.ritual.bounties.war_table.repeatable.bounty5
+    "2827817798": Models.ObjectiveMapping(ActivityType.SEASONAL, WeaponType.LINEAR_FUSION_RIFLE),  // seasons.season13.ritual.bounties.war_table.repeatable.bounty4
+    "254740207": Models.ObjectiveMapping(ActivityType.SEASONAL, DamageType.VOID),  // seasons.season13.ritual.bounties.war_table.repeatable.bounty7
+    "500262252": Models.ObjectiveMapping(ActivityType.SEASONAL, DamageType.SOLAR),  // seasons.season13.ritual.bounties.war_table.repeatable.bounty6
+    "1611028585": Models.ObjectiveMapping(ActivityType.GLOBAL, null),  // seasons.season13.ritual.bounties.war_table.daily.bounty9
+    "1764770174": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.SUBMACHINE_GUN),  // seasons.season13.ritual.bounties.war_table.daily.bounty8
+    "3189733269": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.BOW),  // seasons.season13.ritual.bounties.war_table.daily.bounty5
+    "1978820954": Models.ObjectiveMapping(DestinationType.EUROPA, null),  // seasons.season13.ritual.bounties.war_table.daily.bounty4
+    "1479464355": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.SNIPER_RIFLE),  // seasons.season13.ritual.bounties.war_table.daily.bounty7
+    "3408710656": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.ROCKET_LAUNCHER),  // seasons.season13.ritual.bounties.war_table.daily.bounty6
+    "1861975105": Models.ObjectiveMapping(ActivityType.GLOBAL, DamageType.PRECISION),  // seasons.season13.ritual.bounties.war_table.daily.bounty1
+    "4289013814": Models.ObjectiveMapping(ActivityType.GLOBAL, EnemyType.CABAL),  // seasons.season13.ritual.bounties.war_table.daily.bounty0
+    "3649232415": Models.ObjectiveMapping(DestinationType.COSMODROME, null),  // seasons.season13.ritual.bounties.war_table.daily.bounty3
+    "1690909916": Models.ObjectiveMapping(DestinationType.NESSUS, null),  // seasons.season13.ritual.bounties.war_table.daily.bounty2
+    "199317092": Models.ObjectiveMapping(ActivityType.GLOBAL, EnemyType.FALLEN),  // undefined
+    "2636623213": Models.ObjectiveMapping(ActivityType.GLOBAL, DamageType.ARC),  // seasons.season13.ritual.bounties.war_table.daily.bounty14
+    "2878503986": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.KINETIC),  // seasons.season13.ritual.bounties.war_table.daily.bounty15
+    "3073809435": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.ENERGY),  // seasons.season13.ritual.bounties.war_table.daily.bounty16
+    "936906360": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.POWER),  // seasons.season13.ritual.bounties.war_table.daily.bounty17
+    "1842041273": Models.ObjectiveMapping(ActivityType.GLOBAL, AbilityType.MELEE),  // seasons.season13.ritual.bounties.war_table.daily.bounty10
+    "3367431630": Models.ObjectiveMapping(ActivityType.GLOBAL, AbilityType.GRENADE),  // seasons.season13.ritual.bounties.war_table.daily.bounty11
+    "406579383": Models.ObjectiveMapping(ActivityType.GLOBAL, DamageType.SOLAR),  // seasons.season13.ritual.bounties.war_table.daily.bounty12
+    "1220887828": Models.ObjectiveMapping(ActivityType.GLOBAL, DamageType.VOID),  // seasons.season13.ritual.bounties.war_table.daily.bounty13
+    "1326134929": Models.ObjectiveMapping(ActivityType.SEASONAL, null),  // seasons.season13.ritual.bounties.war_table.daily.bounty18
 
 };
