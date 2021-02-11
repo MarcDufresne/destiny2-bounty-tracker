@@ -12,6 +12,7 @@ WANTED_MANIFESTS = [
     "DestinyInventoryItemDefinition",
     "DestinyInventoryItemLiteDefinition",
     "DestinyObjectiveDefinition",
+    "DestinyPresentationNodeDefinition",
 ]
 DEST_FILE_PATH = "webapp/src/definitions/{}.json"
 

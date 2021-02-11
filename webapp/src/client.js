@@ -100,7 +100,7 @@ export const Client = {
         const userProfileResp = await ApiService.get(
             `/Destiny2/${membershipType}/Profile/${primaryMembership}/`,
             accessToken,
-            {components: "200,201,300,301"}
+            {components: "200,201,300,301,900"}
         );
         const userProfileData = userProfileResp.data;
 
