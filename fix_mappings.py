@@ -18,7 +18,7 @@ if __name__ == '__main__':
     for inv_id, inv in all_inv.items():
         if "objectives" in inv and "Bounty" in inv.get("itemTypeDisplayName", ""):
             for obj_hash in inv["objectives"]["objectiveHashes"]:
-                objectives[str(obj_hash)] = inv["inventory"]["stackUniqueLabel"]
+                objectives[str(obj_hash)] = inv["inventory"].get("stackUniqueLabel", "???")
 
     for line in mapping_lines:
         m = re.match(r"\"(\d+)\".*", line)
