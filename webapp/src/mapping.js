@@ -782,5 +782,46 @@ export const OBJECTIVE_MAPPING = {
     "1922018710": Models.ObjectiveMapping(ActivityType.GLOBAL, null),  // tower.bounties.transmog.repeatable.destinations.bounty6
     "3943580415": Models.ObjectiveMapping(ActivityType.GLOBAL, null),  // tower.bounties.transmog.repeatable.destinations.bounty5
     "3310695228": Models.ObjectiveMapping(DestinationType.DREAMING_CITY, null),  // tower.bounties.transmog.repeatable.destinations.bounty4
+    "1258992693": Models.ObjectiveMapping(ActivityType.SEASONAL, WeaponType.ENERGY),  // seasons.season15.ritual.bounties.mystic_compass.repeatable.bounty13
+    "1706628346": Models.ObjectiveMapping(ActivityType.SEASONAL, WeaponType.KINETIC),  // seasons.season15.ritual.bounties.mystic_compass.repeatable.bounty12
+    "4137245507": Models.ObjectiveMapping(ActivityType.SEASONAL, DamageType.ARC),  // seasons.season15.ritual.bounties.mystic_compass.repeatable.bounty11
+    "4080826272": Models.ObjectiveMapping(ActivityType.SEASONAL, DamageType.VOID),  // seasons.season15.ritual.bounties.mystic_compass.repeatable.bounty10
+    "2436400703": Models.ObjectiveMapping(ActivityType.SEASONAL, DamageType.STASIS),  // seasons.season15.ritual.bounties.mystic_compass.repeatable.bounty15
+    "184626812": Models.ObjectiveMapping(ActivityType.SEASONAL, WeaponType.POWER),  // seasons.season15.ritual.bounties.mystic_compass.repeatable.bounty14
+    "1344455405": Models.ObjectiveMapping(ActivityType.SEASONAL, DamageType.ARC),  // seasons.season15.ritual.bounties.mystic_compass.repeatable.bounty8
+    "1586336178": Models.ObjectiveMapping(ActivityType.SEASONAL, DamageType.SOLAR),  // seasons.season15.ritual.bounties.mystic_compass.repeatable.bounty9
+    "36795045": Models.ObjectiveMapping(ActivityType.SEASONAL, WeaponType.BOW),  // seasons.season15.ritual.bounties.mystic_compass.repeatable.bounty0
+    "2843365930": Models.ObjectiveMapping(ActivityType.SEASONAL, WeaponType.ROCKET_LAUNCHER),  // seasons.season15.ritual.bounties.mystic_compass.repeatable.bounty1
+    "406524915": Models.ObjectiveMapping(ActivityType.SEASONAL, WeaponType.SNIPER_RIFLE),  // seasons.season15.ritual.bounties.mystic_compass.repeatable.bounty2
+    "3889658000": Models.ObjectiveMapping(ActivityType.SEASONAL, WeaponType.SUBMACHINE_GUN),  // seasons.season15.ritual.bounties.mystic_compass.repeatable.bounty3
+    "33967121": Models.ObjectiveMapping(ActivityType.SEASONAL, WeaponType.LINEAR_FUSION_RIFLE),  // seasons.season15.ritual.bounties.mystic_compass.repeatable.bounty4
+    "1387676870": Models.ObjectiveMapping(ActivityType.SEASONAL, WeaponType.SIDEARM),  // seasons.season15.ritual.bounties.mystic_compass.repeatable.bounty5
+    "3109566575": Models.ObjectiveMapping(ActivityType.SEASONAL, DamageType.SOLAR),  // seasons.season15.ritual.bounties.mystic_compass.repeatable.bounty6
+    "3355088620": Models.ObjectiveMapping(ActivityType.SEASONAL, DamageType.VOID),  // seasons.season15.ritual.bounties.mystic_compass.repeatable.bounty7
+    "2342080837": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.KINETIC),  // seasons.season15.ritual.bounties.mystic_compass.daily.bounty20
+    "347327818": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.ENERGY),  // seasons.season15.ritual.bounties.mystic_compass.daily.bounty21
+    "3426058771": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.POWER),  // seasons.season15.ritual.bounties.mystic_compass.daily.bounty22
+    "3388342704": Models.ObjectiveMapping(DestinationType.DREAMING_CITY, null),  // seasons.season15.ritual.bounties.mystic_compass.daily.bounty23
+    "1733792333": Models.ObjectiveMapping(ActivityType.GLOBAL, AbilityType.MELEE),  // seasons.season15.ritual.bounties.mystic_compass.daily.bounty11
+    "1170944530": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.POWER_GRENADE_LAUNCHER),  // seasons.season15.ritual.bounties.mystic_compass.daily.bounty10
+    "181608187": Models.ObjectiveMapping(ActivityType.GLOBAL, AbilityType.FINISHER),  // seasons.season15.ritual.bounties.mystic_compass.daily.bounty13
+    "2331090904": Models.ObjectiveMapping(ActivityType.GLOBAL, AbilityType.GRENADE),  // seasons.season15.ritual.bounties.mystic_compass.daily.bounty12
+    "4170165913": Models.ObjectiveMapping(ActivityType.GLOBAL, null),  // seasons.season15.ritual.bounties.mystic_compass.daily.bounty15
+    "2889058350": Models.ObjectiveMapping(ActivityType.GLOBAL, null),  // seasons.season15.ritual.bounties.mystic_compass.daily.bounty14
+    "2028456215": Models.ObjectiveMapping(ActivityType.GLOBAL, EnemyType.TAKEN),  // seasons.season15.ritual.bounties.mystic_compass.daily.bounty17
+    "1963119220": Models.ObjectiveMapping(ActivityType.GLOBAL, null),  // seasons.season15.ritual.bounties.mystic_compass.daily.bounty16
+    "2282746373": Models.ObjectiveMapping(ActivityType.GLOBAL, DamageType.PRECISION),  // seasons.season15.ritual.bounties.mystic_compass.daily.bounty19
+    "542475274": Models.ObjectiveMapping(ActivityType.GLOBAL, EnemyType.SCORN),  // seasons.season15.ritual.bounties.mystic_compass.daily.bounty18
+    "529647515": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.AUTO_RIFLE),  // seasons.season15.ritual.bounties.mystic_compass.daily.bounty8
+    "2687711736": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.BOW),  // seasons.season15.ritual.bounties.mystic_compass.daily.bounty9
+    "3079768229": Models.ObjectiveMapping(ActivityType.GLOBAL, DamageType.VOID),  // seasons.season15.ritual.bounties.mystic_compass.daily.bounty2
+    "1591371818": Models.ObjectiveMapping(ActivityType.GLOBAL, AbilityType.SUPER),  // seasons.season15.ritual.bounties.mystic_compass.daily.bounty3
+    "3449498099": Models.ObjectiveMapping(ActivityType.GLOBAL, DamageType.ARC),  // seasons.season15.ritual.bounties.mystic_compass.daily.bounty0
+    "2637663888": Models.ObjectiveMapping(ActivityType.GLOBAL, DamageType.SOLAR),  // seasons.season15.ritual.bounties.mystic_compass.daily.bounty1
+    "3076940305": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.HAND_CANNON),  // seasons.season15.ritual.bounties.mystic_compass.daily.bounty6
+    "135682758": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.FUSION_RIFLE),  // seasons.season15.ritual.bounties.mystic_compass.daily.bounty7
+    "1857572463": Models.ObjectiveMapping(ActivityType.GLOBAL, AbilityType.ORBS),  // seasons.season15.ritual.bounties.mystic_compass.daily.bounty4
+    "2103094508": Models.ObjectiveMapping(ActivityType.GLOBAL, WeaponType.SHOTGUN),  // seasons.season15.ritual.bounties.mystic_compass.daily.bounty5
+    "2384066078": Models.ObjectiveMapping(ActivityType.GLOBAL, null),  // events.solstice.bounties.weekly.bounty8
 
 };
