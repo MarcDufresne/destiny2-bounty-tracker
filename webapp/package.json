@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "@mdi/font": "^5.0.45",
-    "@vue/cli-service": "^4.2.3",
+    "@vue/cli-service": "^5.0.8",
     "node-sass": "^4.13.1",
     "sass": "^1.19.0",
     "sass-loader": "^8.0.2",
